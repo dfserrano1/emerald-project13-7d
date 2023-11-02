@@ -12,6 +12,7 @@ export default function ActionButtons({uniqueKey}) {
     // Update status column as approved
 
     // Remove hidden status from gallery, if hidden
+    
   }
 
   function Reject() {
