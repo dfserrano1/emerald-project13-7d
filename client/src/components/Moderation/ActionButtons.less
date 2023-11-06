@@ -1,60 +1,47 @@
 @import "../../assets/style.less";
 
-#navBar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: nowrap;
+.ActionButtons {
+  padding: 0.80em 1.6em; /* Some padding */
+  width: 13em; /* Set a width if needed */
+  display: block; /* Make the buttons appear below each other */
+}
+
+.ant-btn.approve {
   width: 100%;
-  position: -webkit-sticky;
-  position: fixed;
-  top: 0;
-  z-index: 2;
-  height: 8vh;
-  background-color: #colors[primary];
-  padding-right: 2vw;
+  border-radius: 2em;
+  border: 0px;
+  font-weight: bold;
+  margin-bottom: 0.35em;
+  background-color:  rgb(88, 199, 92);
 
-  -moz-box-shadow:    0 1px 5px -1px darken(#colors[primary], 90%);
-  -webkit-box-shadow: 0 1px 5px -1px darken(#colors[primary], 90%);
-  box-shadow:         0 1px 5px -1px darken(#colors[primary], 90%);
-
-  #link {
-    #casmm-logo {
-      position: relative;
-      bottom: 0;
-      height: 6vh;
-      width: auto;
-    }
+  &:hover {
+    color: rgba(0, 0, 0, 0.65);
+    background-color:  rgb(123, 235, 127);
+    border-color: rgb(123, 235, 127);
+  }
+  &:focus {
+    color: rgba(0, 0, 0, 0.65);
+    background-color:  rgba(255, 255, 255, 0.95);
+    border-color:  rgba(255, 255, 255, 0.95); 
   }
 }
 
-#menu-link {
-  background: none !important;
-  border: none;
-  padding: 0 !important;
-  display: inline-block;
-
-  &:focus {
-    outline: none;
-  }
+.ant-btn.reject {
+  width: 100%;
+  border-radius: 2em;
+  border: 0px;
+  font-weight: bold;
+  margin-top: 0.35em;
+  background-color:  rgb(231, 51, 51);
 
   &:hover {
-    cursor: pointer;
+    color: rgba(0, 0, 0, 0.65);
+    background-color:  rgb(255, 107, 107);
+    border-color: rgb(255, 107, 107);
   }
-}
-
-.ant-dropdown-link {
-  color: #colors[tertiary];
-  background: none !important;
-  border: none;
-  padding: 0 !important;
-
   &:focus {
-    outline: none;
-  }
-
-  &:hover {
-    color: #colors[secondary];
-    cursor: pointer;
+    color: rgba(0, 0, 0, 0.65);
+    background-color:  rgba(255, 255, 255, 0.95);
+    border-color:  rgba(255, 255, 255, 0.95); 
   }
 }

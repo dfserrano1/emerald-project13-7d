@@ -1,5 +1,10 @@
 import React from 'react';
 import './ActionButtons.less';
+//import { <-- Import database getter/setters necessary for button function
+//  createActivity,
+//  deleteActivity,
+//  getLessonModuleActivities,
+//} from "../../Utils/requests";
 import { Button } from 'antd';
 
 export default function ActionButtons({uniqueKey}) {
@@ -12,7 +17,7 @@ export default function ActionButtons({uniqueKey}) {
     // Update status column as approved
 
     // Remove hidden status from gallery, if hidden
-    
+
   }
 
   function Reject() {
@@ -23,12 +28,13 @@ export default function ActionButtons({uniqueKey}) {
     // Update status column as rejected
 
     // Enabling hiding post from gallery if not already hidden
+    
   }
 
   return (
     <span className="ActionButtons">
-        <Button onClick={ Approve }>Approve</Button>
-        <Button onClick={ Reject }>Reject</Button>
+        <Button className={'approve'} onClick={ Approve }>Approve</Button>
+        <Button className={'reject'} onClick={ Reject }>Reject</Button>
     </span>
   );
 }
