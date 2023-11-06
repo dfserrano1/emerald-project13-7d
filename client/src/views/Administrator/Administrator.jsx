@@ -1,6 +1,6 @@
 import React from "react"
 import NavBar from "../../components/NavBar/NavBar"
-import ActionButtons from "../../components/Moderation/ActionButtons"
+import CommentFlagButton from "../../components/Moderation/CommentFlagButton"
 import "./Administrator.less"
 
 export default function Administrator(props) {
@@ -8,7 +8,7 @@ export default function Administrator(props) {
   return (
     <div className="container nav-padding">
       <NavBar />
-      <ActionButtons uniqueKey={ num } />
+      <CommentFlagButton uniqueKey={ num } />
     </div>
   )
 }
