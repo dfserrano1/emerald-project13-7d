@@ -1,27 +1,52 @@
 @import "../../assets/style.less";
-@import "../../assets/flag.png";
+
 .CommentFlagButton {
-  padding: 0.80em 1.6em; /* Some padding */
-  width: 13em; /* Set a width if needed */
+  background-image:
+
+          url("../../assets/flag.png");
+  //image: url("../../assets/flag.png");
+  background-size: cover;
+  background-color: transparent;
+  //padding: 0.80em 1.6em; /* Some padding */
+  width: 4em; /* Set a width if needed */
+  height: 3em;
   display: block; /* Make the buttons appear below each other */
 }
 
-.ant-btn.flag {
-  width: 100%;
-  border-radius: 2em;
+.ant-btn.flag_unclicked {
+  width: 60%;
+  height: 95%;
   border: 0px;
-  font-weight: bold;
-  margin-bottom: 0.35em;
-  background-color:  rgb(88, 199, 92);
+  left: 3px;
+  top: 2px;
+  //background-color: rgb(255, 0, 0);
+  background-color:  transparent;
 
   &:hover {
-    color: rgba(0, 0, 0, 0.65);
-    background-color:  rgb(255, 0, 0);
-    border-color: rgb(0, 0, 0);
+    //background-color: rgb(255, 0, 0);
+    background-color:  transparent;
   }
-  /*&:focus {
-    color: rgba(0, 0, 0, 0.65);
-    background-color:  rgba(255, 255, 255, 0.95);
-    border-color:  rgba(255, 255, 255, 0.95); 
-  }*/
+  &:focus {
+    //background-color: rgb(255, 0, 0);
+    background-color: transparent;
+  }
+}
+.ant-btn.flag_clicked {
+  width: 60%;
+  height: 95%;
+  border: 0px;
+  left: 3px;
+  top: 2px;
+  //background-color: transparent;
+  filter: hue-rotate(40deg);
+  &:hover {
+    background-color: rgb(255, 0, 0);
+    //background-color:  transparent;
+    filter: hue-rotate(40deg);
+  }
+  &:focus {
+    background-color: rgb(255, 0, 0);
+    //background-color: transparent;
+    filter: hue-rotate(40deg);
+  }
 }

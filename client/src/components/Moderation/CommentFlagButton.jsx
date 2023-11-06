@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './CommentFlagButton.less';
-import FlagLogo from "../../assets/flag.png";
+import FlagImage from '../../assets/flag.png'
 //import { <-- Import database getter/setters necessary for button function
 //  createActivity,
 //  deleteActivity,
@@ -10,7 +10,7 @@ import { Button } from 'antd';
 
 export default function CommentFlagButton({uniqueKey}) {
 
-  let [action, setAction] = useState("Flag");
+  let [status, setStatus] = useState("flag_unclicked");
   let [clicked, setClicked] = useState(false);
   //if user already reported comment: setAction("Unflag");
   //if user already reported comment: setClicked(true);
@@ -25,7 +25,7 @@ export default function CommentFlagButton({uniqueKey}) {
   }
   function Flag() {
     alert("The content has been flagged! Uniqiue key: " + uniqueKey);
-    setAction("Unflag");
+    setStatus("flag_clicked");
     setClicked(true);
     //add user to array of reporters for specific post
     //hide content for specific user
@@ -33,7 +33,7 @@ export default function CommentFlagButton({uniqueKey}) {
 
   function Unflag() {
     alert("The content has been unflagged! Unique key: " + uniqueKey);
-    setAction("Flag");
+    setStatus("flag_unclicked");
     setClicked(false);
     //remove user from array of reporters for specific post
     //unhide content from specific user
@@ -41,7 +41,7 @@ export default function CommentFlagButton({uniqueKey}) {
 
   return (
     <span className="CommentFlagButton">
-        <Button> <img src ={FlagLogo} id={'flag-logo'} alt="my flag" className={'flag'} onClick={ HandleClick }/></Button>
+        <Button className={status} onClick={ HandleClick }> </Button>
     </span>
   );
-}
+} //style={{backgroundImage:"url('./images/logo.png')",backgroundSize:"cover", width:"40px", height:"40px"}}
