@@ -7,7 +7,7 @@ import './ActionButtons.less';
 //} from "../../Utils/requests";
 import { Button } from 'antd';
 
-export default function ActionButtons({uniqueKey}) {
+export default function ActionButtons({uniqueKey, display = 0}) {
 
   function Approve() {
     // Mark content as appropriate and remove any restrictions on it
@@ -29,10 +29,33 @@ export default function ActionButtons({uniqueKey}) {
     
   }
 
-  return (
-    <span className="ActionButtons">
-        <Button className={'approve'} onClick={ Approve }>Approve</Button>
-        <Button className={'reject'} onClick={ Reject }>Reject</Button>
-    </span>
-  );
+  if (display == 0) {
+    return (
+      <span className="ActionButtons">
+          <Button className={'approve'} onClick={ Approve }>Approve</Button>
+          <Button className={'reject'} onClick={ Reject }>Reject</Button>
+      </span>
+    );
+  }
+  if (display == 1) {
+    return (
+      <span className="ActionButtons">
+          <Button className={'approve'} onClick={ Approve }>Approve</Button>
+      </span>
+    );
+  }
+  if (display == 2) {
+    return (
+      <span className="ActionButtons">
+          <Button className={'reject'} onClick={ Reject }>Reject</Button>
+      </span>
+    );
+  } else {
+    return (
+      <span className="ActionButtons">
+          <Button className={'approve'} onClick={ Approve }>Approve</Button>
+          <Button className={'reject'} onClick={ Reject }>Reject</Button>
+      </span>
+    );
+  }
 }
