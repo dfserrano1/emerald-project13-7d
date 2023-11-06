@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reports",
+  "info": {
+    "name": "Reports",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Unique_Key": {
+      "type": "biginteger"
+    },
+    "Views": {
+      "type": "biginteger"
+    },
+    "Report_Count": {
+      "type": "biginteger"
+    },
+    "User_Name": {
+      "type": "string"
+    },
+    "Report_Status": {
+      "type": "integer"
+    }
+  }
+}
