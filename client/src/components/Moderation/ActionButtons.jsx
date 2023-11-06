@@ -12,9 +12,8 @@ export default function ActionButtons({uniqueKey}) {
   function Approve() {
     // Mark content as appropriate and remove any restrictions on it
     alert("The content has been approved! Uniqiue key: " + uniqueKey);
-    // Connect to database
-
-    // Update status column as approved
+    
+    // Use setter from requests.js to update status column as approved
 
     // Remove hidden status from gallery, if hidden
 
@@ -23,9 +22,8 @@ export default function ActionButtons({uniqueKey}) {
   function Reject() {
     // Mark content as inappropriate and restrict it from being displayed publically
     alert("The content has been rejected! Uniqiue key: " + uniqueKey);
-    // Connect to database
 
-    // Update status column as rejected
+    // Use setter from requests.js to update status column as rejected
 
     // Enabling hiding post from gallery if not already hidden
     
