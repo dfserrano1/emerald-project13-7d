@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './ActionButtons.less';
+import './Resolved.less';
 import data from './Data/MOCK_DATA.json';
 
 export default function Resolved() {
