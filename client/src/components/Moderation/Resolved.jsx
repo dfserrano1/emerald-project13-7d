@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import './Resolved.less';
 import data from './Data/MOCK_DATA.json';
+import ActionButtons from "./ActionButtons"
+import './ActionButtons.less'
+import '../../views/Administrator/Administrator.less'
 
 export default function Resolved() {
     // set data from JSON file to incidentList 
@@ -24,22 +27,21 @@ export default function Resolved() {
 
     function editButton(incident) {
         if (incident.status == 1){
-            return <button>Reject</button>;
+            return <ActionButtons uniqueKey={ incident.id } display={ 2 } />;
         } else {
-            return <button>Approve</button>;
+            return <ActionButtons uniqueKey={ incident.id } display={ 1 } />;
         }
     }
 
     return (
       <span className="Resolved">
           <h1>Resolved</h1>
-          <div className="container">
+          <div className="table-container">
             <table>
                 <thead>
                     <tr>
                         <th>Username</th>
                         <th>Project Name</th>
-                        <th>Project Thumbnail</th>
                         <th># of Views</th>
                         <th># of Reports</th>
                         <th>Status</th>
@@ -48,12 +50,9 @@ export default function Resolved() {
                 </thead>
                 <tbody>
                     {resolvedIncidents.map((incident)=>
-                        <tr>
+                        <tr className={incident.status==1 ? "approved" : "rejected"}>
                             <td>{incident.username}</td>
                             <td>{incident.project}</td>
-                            <td>
-                                <img src={incident.thumbnail}/>
-                            </td>
                             <td>{incident.views}</td>
                             <td>{incident.reports}</td>
                             <td>
@@ -66,6 +65,9 @@ export default function Resolved() {
                     )}
                 </tbody>
             </table>
+          </div>
+          <div className='summary'>
+            <h2>Incident Summary</h2>
           </div>
       </span>
     );

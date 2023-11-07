@@ -1,5 +1,5 @@
 @import "../../assets/style.less";
-.container {
+.table-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -8,24 +8,39 @@
   
   table {
     border-collapse: collapse;
-    width: 80%;
-    margin: auto;
+    width: 50%;
+    float: left;
   }
   
-  th,
   td {
-    border: 1px solid #ffffff;
     text-align: left;
     padding: 8px;
     font-size: 32px;
+    border: 1px solid #ffffff;
   }
   
   th {
+    text-align: left;
+    padding: 8px;
+    font-size: 32px;
     background-color: rgb(117, 201, 250);
+    border: 1px solid #ffffff;
   }
   
-  td {
-    background-color: rgb(205, 235, 253);
+  tr.approved {
+    background-color: lightgreen;
+  }
+
+  tr.approved:hover {
+    background-color: rgb(171, 238, 171);
+  }
+
+  tr.rejected {
+    background-color: lightcoral;
+  }
+
+  tr.rejected:hover {
+    background-color: rgb(237, 150, 150);
   }
   
   form {
@@ -42,4 +57,7 @@
     font-size: 28px;
   }
   
-  
+  summary {
+    float: right;
+    text-align: right;
+  }
