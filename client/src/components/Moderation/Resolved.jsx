@@ -37,15 +37,16 @@ export default function Resolved() {
       <span className="Resolved">
           <h1>Resolved</h1>
           <div className="table-container">
+            <h2>Resolved Projects</h2>
             <table>
                 <thead>
                     <tr>
                         <th>Username</th>
                         <th>Project Name</th>
-                        <th># of Views</th>
                         <th># of Reports</th>
+                        <th># of Views</th>
                         <th>Status</th>
-                        <th>Edit</th>
+                        {/* <th>Edit</th> */}
                     </tr>
                 </thead>
                 <tbody>
@@ -53,14 +54,14 @@ export default function Resolved() {
                         <tr className={incident.status==1 ? "approved" : "rejected"}>
                             <td>{incident.username}</td>
                             <td>{incident.project}</td>
-                            <td>{incident.views}</td>
                             <td>{incident.reports}</td>
+                            <td>{incident.views}</td>
                             <td>
                                 {convertStatus(incident)}
                             </td>
-                            <td>
+                            {/* <td>
                                 {editButton(incident)}
-                            </td>
+                            </td> */}
                         </tr>
                     )}
                 </tbody>
@@ -68,6 +69,7 @@ export default function Resolved() {
           </div>
           <div className='summary'>
             <h2>Incident Summary</h2>
+            <h3>Select an incident to view more information</h3>
           </div>
       </span>
     );
