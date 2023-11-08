@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import AdminTab from "../../components/Moderation/AdminTab";
-import PostPreview from "../../components/Moderation/PostPreview";
+import ViewIncident from "../../components/Moderation/ViewIncident";
 import "./GalleryAdmin.less";
 
 function GalleryAdmin() {
@@ -35,7 +35,7 @@ function GalleryAdmin() {
       </div>
 
       {displayTabContent()}
-      <PostPreview />
+      <ViewIncident isPending={activeTab === "Pending Review"} isProject={true} />
 
     </div>
   );
