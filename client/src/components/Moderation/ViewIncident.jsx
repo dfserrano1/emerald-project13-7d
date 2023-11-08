@@ -8,6 +8,7 @@ function ViewIncident({ isPending, isProject }) {
   const reports = 5;
   const views = 100;
   const status = "Approved";
+  const commentText = "This is a very very very very very very very very very long comment!";
 
   // Renders status depending on if we're in the Pending Review or Resolved tab. Throws exception
   // if status value is unexpected with regards to the current tab.
@@ -42,20 +43,37 @@ function ViewIncident({ isPending, isProject }) {
     }
   }
 
-  let comment;
-  let preview;
-  if (isProject) {
-    preview = <img src={Logo} className="preview" />; // Logo is a placeholder image.
-  }
-  else {
-    comment = "This is a very very very very very very very very very very very long comment!";
-    preview = (
-      <div className="preview">
-        <div>
-          <b>Comment:</b> {comment}
+  // Renders thumbnail or commentText depending on if the selected incident is a project or
+  // comment.
+  function renderContent() {
+    if (isProject) {
+      return <img src={Logo} className="preview" />; // Logo is a placeholder image.
+    }
+    else {
+      return (
+        <div className="preview">
+          <div>
+            <b>Comment:</b> {commentText}
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+  }
+
+  // Returns className for styling Incident Summary box. White for Pending Review tab, and green
+  // or red for Resolved tab.
+  function changeBoxColor() {
+    if (isPending) {
+      return "pending";
+    }
+    else {
+      if (status === "Approved") {
+        return "resolved-approved";
+      }
+      else if (status === "Rejected") {
+        return "resolved-rejected";
+      }
+    }
   }
 
   return (
@@ -64,8 +82,8 @@ function ViewIncident({ isPending, isProject }) {
       <h3><b>Incident Summary</b></h3>
       <p><b>Select an incident to view more information</b></p>
 
-      <div className="view-post">
-        <div className="left-text">
+      <div className="view-incident">
+        <div className={changeBoxColor()}>
 
           <b>User:</b> {user}
           <br />
@@ -75,13 +93,9 @@ function ViewIncident({ isPending, isProject }) {
           <br />
           <b>Views:</b> {views}
           <br />
-
-          {/* If we're in Pending Review tab, render nothing. Else, render Status. */}
           {renderStatus()}
           <br />
-
-          {/* If it's a project, render thumbnail. Else, render Comment. */}
-          {preview}
+          {renderContent()}
 
         </div>
       </div>
