@@ -1,10 +1,10 @@
 import "./AdminTab.less";
 
-function AdminTab({ tabName, activeTab, setActiveTab }) {
+function AdminTab({ tabName, activeTab, updateActiveTab }) {
   const isActive = (activeTab === tabName);
   
   function handleTabClick() {
-    setActiveTab(tabName);
+    updateActiveTab(tabName);
   };
   
   return (
