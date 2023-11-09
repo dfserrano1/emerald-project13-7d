@@ -11,19 +11,20 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "Unique_Key": {
+    "unique_key": {
+      "type": "biginteger",
+      "required": false
+    },
+    "views": {
       "type": "biginteger"
     },
-    "Views": {
+    "report_count": {
       "type": "biginteger"
     },
-    "Report_Count": {
-      "type": "biginteger"
-    },
-    "User_Name": {
+    "user_name": {
       "type": "string"
     },
-    "Report_Status": {
+    "report_status": {
       "type": "integer"
     }
   }
