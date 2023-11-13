@@ -5,8 +5,14 @@ import './ActionButtons.less';
 //  deleteActivity,
 //  getLessonModuleActivities,
 //} from "../../Utils/requests";
+//import { <-- Import database getter/setters necessary for button function
+//  createActivity,
+//  deleteActivity,
+//  getLessonModuleActivities,
+//} from "../../Utils/requests";
 import { Button } from 'antd';
 
+export default function ActionButtons({uniqueKey, display = 0}) {
 export default function ActionButtons({uniqueKey, display = 0}) {
 
   function Approve() {
@@ -14,8 +20,11 @@ export default function ActionButtons({uniqueKey, display = 0}) {
     alert("The content has been approved! Uniqiue key: " + uniqueKey);
     
     // Use setter from requests.js to update status column as approved
+    
+    // Use setter from requests.js to update status column as approved
 
     // Remove hidden status from gallery, if hidden
+
 
   }
 
@@ -24,8 +33,10 @@ export default function ActionButtons({uniqueKey, display = 0}) {
     alert("The content has been rejected! Uniqiue key: " + uniqueKey);
 
     // Use setter from requests.js to update status column as rejected
+    // Use setter from requests.js to update status column as rejected
 
     // Enabling hiding post from gallery if not already hidden
+    
     
   }
 
