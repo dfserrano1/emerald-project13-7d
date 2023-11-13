@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './Utils/PrivateRoute';
 import About from './views/About/About';
+import Administrator from './views/Administrator/Administrator';
 import BlocklyPage from './views/BlocklyPage/BlocklyPage';
 import BugReport from './views/BugReport/BugReport';
 import ContentCreator from './views/ContentCreator/ContentCreator';
@@ -32,6 +33,7 @@ const App = () => {
         <Route path='/login' element={<StudentLogin />} />
         <Route path='/replay/:saveID' element={<Replay />} />
         <Route path='/sandbox' element={<BlocklyPage isSandbox={true} />} />
+        <Route path='/administrator' element={<Administrator />} />
         <Route
           path='/report'
           element={
