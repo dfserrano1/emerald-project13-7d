@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './Utils/PrivateRoute';
+import Administrator from './views/Administrator/Administrator'
 import About from './views/About/About';
 import BlocklyPage from './views/BlocklyPage/BlocklyPage';
 import BugReport from './views/BugReport/BugReport';
@@ -19,7 +20,6 @@ import StudentLogin from './views/StudentLogin/StudentLogin';
 import ForgetPassword from './views/TeacherLogin/ForgetPassword';
 import ResetPassword from './views/TeacherLogin/ResetPassword';
 import TeacherLogin from './views/TeacherLogin/TeacherLogin';
-
 import GalleryAdmin from './views/Administrator/GalleryAdmin';
 
 const App = () => {
@@ -34,8 +34,8 @@ const App = () => {
         <Route path='/login' element={<StudentLogin />} />
         <Route path='/replay/:saveID' element={<Replay />} />
         <Route path='/sandbox' element={<BlocklyPage isSandbox={true} />} />
-
         <Route path='/galleryadmin' element={<GalleryAdmin />} />
+        <Route path='/administrator' element={<Administrator />} />
 
         <Route
           path='/report'
