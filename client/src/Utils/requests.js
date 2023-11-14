@@ -9,6 +9,7 @@ const DELETE = 'DELETE';
 
 // all request functions should utilize makeRequest and return an obj with structure {data, err}
 const makeRequest = async ({ method, path, data, auth = false, error }) => {
+  //console.log(data);
   let res = null;
   let err = null;
   const config = auth
@@ -672,3 +673,57 @@ export const getClassroomWorkspace = async (id) =>
     auth: true,
     error: 'Unable to retrive classroom workspaces',
   });
+
+  //most likely need to change this to get a single report as this will allow the passing of an object into the update/create functions
+  export const getReports = async () => 
+    makeRequest({
+      method: GET,
+      path: `${server}/reports`,
+      auth: true,
+      error: 'Unable to retrive reports',
+    });
+
+    //when the flag button is pressed, this function is called to create a report in the database
+    export const createReport = async (
+      unique_key,
+      views,
+      report_count,
+      user_name,
+      report_status
+    ) =>
+      makeRequest({
+        method: POST,
+        path: `${server}/reports`,
+        auth: true,
+        data: {
+          unique_key,
+          views,
+          report_count,
+          user_name,
+          report_status,
+        },
+        error: 'Unable to create report',
+      });
+
+      //when the admin makes an update to the report, this function is called in order to update the report status
+      export const updateReport = async (
+        unique_key,
+        views,
+        report_count,
+        user_name,
+        report_status,
+        id
+      ) =>
+        makeRequest({
+          method: PUT,
+          path: `${server}/reports/${id}`,
+          data: {
+            unique_key: unique_key,
+            views: views,
+            report_count: report_count,
+            user_name: user_name,
+            report_status: report_status,
+          },
+          auth: true,
+          error: 'Failed to update report',
+        });

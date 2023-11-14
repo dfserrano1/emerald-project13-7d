@@ -11,11 +11,8 @@ export default function CommentFlagButton({uniqueKey}){
 
   let [status, setStatus] = useState("Unclicked");
   let [clicked, setClicked] = useState(false);
-  //if user already reported comment: setAction("Unflag");
-  //if user already reported comment: setClicked(true);
-  //will be done by iterating through the array of reporters
-  //for comment and attempting to match them with the user
-  //if globally hidden, flags should cease to be created
+
+
 
   function HandleClick() {
     if (!clicked) {
