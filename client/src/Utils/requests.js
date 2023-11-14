@@ -674,6 +674,14 @@ export const getClassroomWorkspace = async (id) =>
     error: 'Unable to retrive classroom workspaces',
   });
 
+export const getReport = async (id) =>
+  makeRequest({
+    method: GET,
+    path: `${server}/reports/${id}`,
+    auth: true,
+    error: 'Unable to retrive report',
+  });
+
   //most likely need to change this to get a single report as this will allow the passing of an object into the update/create functions
   export const getReports = async () => 
     makeRequest({
