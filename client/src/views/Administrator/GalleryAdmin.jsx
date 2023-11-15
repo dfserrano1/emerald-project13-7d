@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import AdminTab from "../../components/Moderation/AdminTab";
 import ViewIncident from "../../components/Moderation/ViewIncident";
+import Resolved from "../../components/Moderation/Resolved"
 import "./GalleryAdmin.less";
 
 function GalleryAdmin() {
@@ -45,6 +46,7 @@ function GalleryAdmin() {
 
       {renderTabContent()}
       <ViewIncident isPending={activeTab === "Pending Review"} isProject={true} />
+      <Resolved isPending={activeTab === "Pending Review"}/>
 
     </div>
   );
