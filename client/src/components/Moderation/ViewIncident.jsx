@@ -1,4 +1,3 @@
-import Logo from '../../assets/casmm_logo.png';
 import "./ViewIncident.less";
 
 function ViewIncident({ isPending, isProject }) {
@@ -7,63 +6,13 @@ function ViewIncident({ isPending, isProject }) {
   const title = "My Project";
   const reports = 5;
   const views = 100;
-  const status = "Approved";
+  const status = "Pending";
   const commentText = "This is a very very very very very very very very very long comment!";
-
-  // Renders status depending on if we're in the Pending Review or Resolved tab. Throws exception
-  // if status value is unexpected with regards to the current tab.
-  function renderStatus() {
-    if (isPending) {
-      if (status == null) {
-        return null;
-      }
-      else {
-        /*
-        throw new Error("Selected incident in Pending Review tab has a status defined. " +
-          "Only resolved incidents should have a status."
-        );
-        */
-      }
-    }
-    else { // !isPending
-      if (status === "Approved" || status === "Rejected") {
-        return (
-          <div>
-            <b>Status:</b> {status}
-          </div>
-        );
-      }
-      else {
-        /*
-        throw new Error("Selected incident in Resolved tab has unexpected or undefined status." +
-          "Expected \"Approved\" or \"Rejected\"."
-        );
-        */
-      }
-    }
-  }
-
-  // Renders thumbnail or commentText depending on if the selected incident is a project or
-  // comment.
-  function renderContent() {
-    if (isProject) {
-      return <img src={Logo} className="preview" />; // Logo is a placeholder image.
-    }
-    else {
-      return (
-        <div className="preview">
-          <div>
-            <b>Comment:</b> {commentText}
-          </div>
-        </div>
-      );
-    }
-  }
 
   // Returns className for styling Incident Summary box. White for Pending Review tab, and green
   // or red for Resolved tab.
   function changeBoxColor() {
-    if (isPending) {
+    if (status === "Pending") {
       return "pending";
     }
     else {
@@ -93,9 +42,9 @@ function ViewIncident({ isPending, isProject }) {
           <br />
           <b>Views:</b> {views}
           <br />
-          {renderStatus()}
+          <b>Status:</b> {status}
           <br />
-          {renderContent()}
+          {isProject ? null : <div><b>Comment:</b> {commentText}</div>}
 
         </div>
       </div>

@@ -11,25 +11,6 @@ function GalleryAdmin() {
     setActiveTab(tab);
   }
 
-  function renderTabContent() {
-    let tabContent = null;
-
-    if (activeTab === "Pending Review") {
-      tabContent = (
-        // Render tables of pending review projects and comments on the left.
-        <p>This is the Pending Review tab!</p>
-      );
-    }
-    else { // activeTab === Resolved tab.
-      tabContent = (
-        // Render tables of resolved projects and comments on the left.
-        <p>This is the Resolved tab!</p>
-      );
-    }
-
-    return tabContent;
-  }
-
   return (
     <div className="container nav-padding">
       <NavBar />
@@ -44,8 +25,8 @@ function GalleryAdmin() {
         />
       </div>
 
-      {renderTabContent()}
-      <ViewIncident isPending={activeTab === "Pending Review"} isProject={true} />
+      <br />
+      <ViewIncident isPending={activeTab === "Pending Review"} isProject={false} />
       <Resolved isPending={activeTab === "Pending Review"}/>
 
     </div>
