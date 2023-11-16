@@ -3,15 +3,15 @@ import './ActionButtons.less';
 import { getReport, updateReport } from "../../Utils/requests";
 import { Button } from 'antd';
 
-export default function ActionButtons({uniqueKey, display = 0}) {
+export default function ActionButtons({reportID, display = 0}) {
 
   function Approve() {
     // Mark content as appropriate and remove any restrictions on it
-    alert("The content has been approved! Uniqiue key: " + uniqueKey);
+    alert("The content has been approved! Report ID: " + reportID);
     
     // Use setter from requests.js to update status column as approved
-    report = getReport(uniqueKey);
-    updateReport(report.unique_key, report.views, report.report_count, report.user_name, 1, uniqueKey)
+    const report = getReport(reportID);
+    updateReport(report.unique_key, report.views, report.report_count, report.user_name, 1, reportID);
 
     // Remove hidden status from gallery, if hidden
 
@@ -19,9 +19,11 @@ export default function ActionButtons({uniqueKey, display = 0}) {
 
   function Reject() {
     // Mark content as inappropriate and restrict it from being displayed publically
-    alert("The content has been rejected! Uniqiue key: " + uniqueKey);
+    alert("The content has been rejected! Report ID: " + reportID);
 
     // Use setter from requests.js to update status column as rejected
+    const report = getReport(reportID);
+    updateReport(report.unique_key, report.views, report.report_count, report.user_name, 2, reportID);
 
     // Enabling hiding post from gallery if not already hidden
     
