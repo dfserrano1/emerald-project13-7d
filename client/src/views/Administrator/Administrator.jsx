@@ -11,6 +11,7 @@ export default function Administrator(props) {
     <div className="container nav-padding">
       <NavBar />
       <Resolved/>
+      <ActionButtons />
     </div>
   )
 }

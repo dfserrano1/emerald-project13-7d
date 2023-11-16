@@ -1,10 +1,6 @@
 import React from 'react';
 import './ActionButtons.less';
-//import { <-- Import database getter/setters necessary for button function
-//  createActivity,
-//  deleteActivity,
-//  getLessonModuleActivities,
-//} from "../../Utils/requests";
+import { getReport, updateReport } from "../../Utils/requests";
 import { Button } from 'antd';
 
 export default function ActionButtons({uniqueKey, display = 0}) {
@@ -14,6 +10,8 @@ export default function ActionButtons({uniqueKey, display = 0}) {
     alert("The content has been approved! Uniqiue key: " + uniqueKey);
     
     // Use setter from requests.js to update status column as approved
+    report = getReport(uniqueKey);
+    updateReport(report.unique_key, report.views, report.report_count, report.user_name, 1, uniqueKey)
 
     // Remove hidden status from gallery, if hidden
 
