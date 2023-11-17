@@ -4,7 +4,7 @@ import data from './Data/MOCK_DATA.json';
 import '../../views/Administrator/Administrator.less'
 
 // Resolved Tab
-export default function Resolved({isPending}) {
+export default function Resolved({isPending, updateSelected}) {
     // set data from JSON file to incidentList 
     const [incidentList, setIncidentList] = useState(data);
 
@@ -39,7 +39,7 @@ export default function Resolved({isPending}) {
                 <tbody>
                     {/* Map incident information to specific column */}
                     {pendingIncidents.map((incident)=>
-                        <tr className="pending" onClick={displayInfo}>
+                        <tr className="pending" onClick={() => updateSelected(incident.id, true)}>
                             <td>{incident.username}</td>
                             <td>{incident.project}</td>
                             <td>{incident.reports}</td>
@@ -57,7 +57,7 @@ export default function Resolved({isPending}) {
                 <tbody>
                     {/* Map incident information to specific column */}
                     {resolvedIncidents.map((incident)=>
-                        <tr className={incident.status==1 ? "approved" : "rejected"} onClick={displayInfo}>
+                        <tr className={incident.status==1 ? "approved" : "rejected"} onClick={() => updateSelected(incident.id, true)}>
                             <td>{incident.username}</td>
                             <td>{incident.project}</td>
                             <td>{incident.reports}</td>
@@ -82,17 +82,6 @@ export default function Resolved({isPending}) {
         } else {
             return "Pending";
         }
-    }
-
-    // Temporary function to test onClick fucntionality of table
-    function displayInfo() {
-        if (isPending) {
-            alert("info for incident");
-        }
-        else {
-            alert("resolved");
-        }
-        
     }
 
     // Output

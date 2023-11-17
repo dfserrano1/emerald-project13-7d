@@ -1,54 +1,41 @@
+import data from './Data/MOCK_DATA.json';
 import "./ViewIncident.less";
 
-function ViewIncident({ isPending, isProject }) {
-  // Incident data should come from DB. Values are hardcoded for now.
-  const user = "Student1";
-  const title = "My Project";
-  const reports = 5;
-  const views = 100;
-  const status = "Pending";
-  const commentText = "This is a very very very very very very very very very long comment!";
+function ViewIncident({ id, isProject }) {
+  const selected = data.find((incident) => (incident.id == id)); // Instead of this, do getReport() to get report with matching ID from DB.
+  const commentText = "This is a comment!"; // Won't be needed in the future since DB should have commentText column.
 
   // Returns className for styling Incident Summary box. White for Pending Review tab, and green
   // or red for Resolved tab.
-  function changeBoxColor() {
-    if (status === "Pending") {
-      return "pending";
+  function getStatus() {
+    if (selected.status == 0) {
+      return "Pending";
     }
-    else {
-      if (status === "Approved") {
-        return "resolved-approved";
-      }
-      else if (status === "Rejected") {
-        return "resolved-rejected";
-      }
+    else if (selected.status == 1) {
+      return "Approved";
+    }
+    else if (selected.status == 2) {
+      return "Rejected";
     }
   }
 
   return (
-    <div className="right-column">
+    <div className="view-incident">
+      <div className={getStatus().toLowerCase()}>
 
-      <h3><b>Incident Summary</b></h3>
-      <p><b>Select an incident to view more information</b></p>
+        <b>Username:</b> {selected.username}
+        <br />
+        <b>Project Name:</b> {selected.project}
+        <br />
+        <b>Reports:</b> {selected.reports}
+        <br />
+        <b>Views:</b> {selected.views}
+        <br />
+        <b>Status:</b> {getStatus()}
+        <br />
+        {isProject ? null : <div><b>Comment:</b> {commentText}</div>}
 
-      <div className="view-incident">
-        <div className={changeBoxColor()}>
-
-          <b>User:</b> {user}
-          <br />
-          <b>Title:</b> {title}
-          <br />
-          <b>Reports:</b> {reports}
-          <br />
-          <b>Views:</b> {views}
-          <br />
-          <b>Status:</b> {status}
-          <br />
-          {isProject ? null : <div><b>Comment:</b> {commentText}</div>}
-
-        </div>
       </div>
-
     </div>
   );
 }
