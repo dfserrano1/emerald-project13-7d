@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './Utils/PrivateRoute';
-import Administrator from './views/Administrator/Administrator'
 import About from './views/About/About';
 import Administrator from './views/Administrator/Administrator';
 import FlagPage from './views/FlagPage/FlagPage';
