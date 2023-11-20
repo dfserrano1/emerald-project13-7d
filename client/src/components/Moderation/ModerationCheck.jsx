@@ -18,7 +18,6 @@ export default function ModerationCheck({contentID, userID}){
                 return HiddenStatus.LocallyHidden;
             }
         }
-    } else {
-        return HiddenStatus.Displayed;
-    }
+    } 
+    return HiddenStatus.Displayed;
 }

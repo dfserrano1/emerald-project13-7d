@@ -37,8 +37,8 @@ const App = () => {
         <Route path='/sandbox' element={<BlocklyPage isSandbox={true} />} />
         <Route path='/galleryadmin' element={<GalleryAdmin />} />
         <Route path='/administrator' element={<Administrator />} />
-
         <Route path='/flag' element={<FlagPage />} />
+        
         <Route
           path='/report'
           element={
