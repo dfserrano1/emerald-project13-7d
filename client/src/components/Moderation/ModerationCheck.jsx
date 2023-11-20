@@ -15,8 +15,10 @@ export default function ModerationCheck({contentID, userID}){
         }
         for (reporter in report.getReporters()) {
             if (userID == reporter) {
-                return
+                return HiddenStatus.LocallyHidden;
             }
         }
+    } else {
+        return HiddenStatus.Displayed;
     }
 }
