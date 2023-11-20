@@ -9,11 +9,18 @@ import { useGlobalState } from "../../Utils/userState"
 export default function Administrator(props) {
   const [value] = useGlobalState("currUser")
   const num = 3;
+  if (value.role === "ContentCreator") { // Change to administrator role
     return (
-    <div className="container nav-padding">
-      <NavBar />
-      <Resolved/>
-      <ActionButtons reportID={1} />
-    </div>
-  )
+      <div className="container nav-padding">
+        <NavBar />
+        <Resolved/>
+        <ActionButtons reportID={1} />
+      </div>
+    )
+  } else {
+    return (
+      <p>Unauthorized.</p>
+    )
+  }
+
 }
