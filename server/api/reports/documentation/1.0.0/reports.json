@@ -522,19 +522,22 @@
           "id": {
             "type": "string"
           },
-          "Unique_Key": {
+          "unique_key": {
             "type": "integer"
           },
-          "Views": {
+          "views": {
             "type": "integer"
           },
-          "Report_Count": {
+          "report_count": {
             "type": "integer"
           },
-          "User_Name": {
+          "user_name": {
             "type": "string"
           },
-          "Report_Status": {
+          "report_status": {
+            "type": "integer"
+          },
+          "globally_hidden": {
             "type": "integer"
           },
           "published_at": {
@@ -545,19 +548,22 @@
       },
       "NewReports": {
         "properties": {
-          "Unique_Key": {
+          "unique_key": {
             "type": "integer"
           },
-          "Views": {
+          "views": {
             "type": "integer"
           },
-          "Report_Count": {
+          "report_count": {
             "type": "integer"
           },
-          "User_Name": {
+          "user_name": {
             "type": "string"
           },
-          "Report_Status": {
+          "report_status": {
+            "type": "integer"
+          },
+          "globally_hidden": {
             "type": "integer"
           },
           "published_at": {
