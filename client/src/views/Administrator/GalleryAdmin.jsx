@@ -39,7 +39,7 @@ function GalleryAdmin() {
       <div className="right-column">
         <h3><b>Incident Summary</b></h3>
         <p><b>Select an incident to view more information</b></p>
-        {selectedID == 0 ? null : <ViewIncident id={selectedID} isProject={selectedIsProject} />}
+        <ViewIncident id={selectedID} isProject={selectedIsProject} />
       </div>
 
       <Resolved isPending={activeTab === "Pending Review"} updateSelected={updateSelected} />

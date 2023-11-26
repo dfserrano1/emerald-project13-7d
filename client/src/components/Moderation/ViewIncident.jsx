@@ -19,23 +19,46 @@ function ViewIncident({ id, isProject }) {
     }
   }
 
+  // Renders Incident Summary box content depending on whether an incident is selected.
+  function renderSummary() {
+    if (id == 0) {
+      return (
+        <div className="pending">
+          <b>Username:</b>
+          <br />
+          <b>Project Name:</b>
+          <br />
+          <b>Reports:</b>
+          <br />
+          <b>Views:</b>
+          <br />
+          <b>Status:</b>
+          <br />
+        </div>
+      );
+    }
+    else {
+      return (
+        <div className={getStatus().toLowerCase()}>
+          <b>Username:</b> {selected.username}
+          <br />
+          <b>Project Name:</b> {selected.project}
+          <br />
+          <b>Reports:</b> {selected.reports}
+          <br />
+          <b>Views:</b> {selected.views}
+          <br />
+          <b>Status:</b> {getStatus()}
+          <br />
+          {isProject ? null : <div><b>Comment:</b> {commentText}</div>}
+        </div>
+      );
+    }
+  }
+
   return (
     <div className="view-incident">
-      <div className={getStatus().toLowerCase()}>
-
-        <b>Username:</b> {selected.username}
-        <br />
-        <b>Project Name:</b> {selected.project}
-        <br />
-        <b>Reports:</b> {selected.reports}
-        <br />
-        <b>Views:</b> {selected.views}
-        <br />
-        <b>Status:</b> {getStatus()}
-        <br />
-        {isProject ? null : <div><b>Comment:</b> {commentText}</div>}
-
-      </div>
+      {renderSummary()}
     </div>
   );
 }
