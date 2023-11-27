@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import Less from './CommentFlagButton.less';
-import {getReport} from '../../Utils/requests';
 import {getReportFromGalleryID} from '../../Utils/requests';
 import {updateReporters} from '../../Utils/requests';
 import {deleteReport} from '../../Utils/requests';
-import {getContent} from '../../Utils/requests';
 import {createReport} from '../../Utils/requests';
 import {updateReport} from '../../Utils/requests';
 import {HiddenStatus} from './ModerationCheck.jsx';
