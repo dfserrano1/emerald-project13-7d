@@ -1,4 +1,5 @@
 import data from './Data/MOCK_DATA.json';
+import ActionButtons from "../../components/Moderation/ActionButtons";
 import "./ViewIncident.less";
 
 function ViewIncident({ id, isProject }) {
@@ -19,8 +20,22 @@ function ViewIncident({ id, isProject }) {
     }
   }
 
+  // Passes a different value into the ActionButtons display prop depending on how many buttons
+  // must be rendered.
+  function setActionButtonDisplay() {
+    if (selected.status == 0) {
+      return 0; // Pending Incidents: Display both buttons.
+    }
+    else if (selected.status == 1) {
+      return 2; // Approved Incidents: Display only the Reject button.
+    }
+    else if (selected.status == 2) {
+      return 1; // Rejected Incidents: Display only the Approve button.
+    }
+  }
+
   // Renders Incident Summary box content depending on whether an incident is selected.
-  function renderSummary() {
+  function renderContent() {
     if (id == 0) {
       return (
         <div className="pending">
@@ -51,6 +66,8 @@ function ViewIncident({ id, isProject }) {
           <b>Status:</b> {getStatus()}
           <br />
           {isProject ? null : <div><b>Comment:</b> {commentText}</div>}
+          <br />
+          <ActionButtons reportID={id} display={setActionButtonDisplay()} />
         </div>
       );
     }
@@ -58,7 +75,7 @@ function ViewIncident({ id, isProject }) {
 
   return (
     <div className="view-incident">
-      {renderSummary()}
+      {renderContent()}
     </div>
   );
 }
