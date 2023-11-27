@@ -32,6 +32,10 @@
     },
     "last_logged_in": {
       "type": "datetime"
+    },
+    "report": {
+      "via": "students",
+      "model": "reports"
     }
   }
 }

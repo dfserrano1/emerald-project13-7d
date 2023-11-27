@@ -30,8 +30,9 @@
     "report_status": {
       "type": "string"
     },
-    "users_reporting": {
-      "type": "json"
+    "students": {
+      "collection": "student",
+      "via": "report"
     }
   }
 }

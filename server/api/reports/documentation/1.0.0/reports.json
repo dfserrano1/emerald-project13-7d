@@ -534,11 +534,55 @@
           "user_name": {
             "type": "string"
           },
+          "globally_hidden": {
+            "type": "integer"
+          },
           "report_status": {
             "type": "string"
           },
-          "globally_hidden": {
-            "type": "integer"
+          "students": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "enrolled"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "character": {
+                  "type": "string"
+                },
+                "classroom": {
+                  "type": "string"
+                },
+                "sessions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "enrolled": {
+                  "type": "boolean"
+                },
+                "last_logged_in": {
+                  "type": "string"
+                },
+                "report": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "published_at": {
             "type": "string",
@@ -560,11 +604,17 @@
           "user_name": {
             "type": "string"
           },
-          "report_status": {
-            "type": "integer"
-          },
           "globally_hidden": {
             "type": "integer"
+          },
+          "report_status": {
+            "type": "string"
+          },
+          "students": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "published_at": {
             "type": "string",
