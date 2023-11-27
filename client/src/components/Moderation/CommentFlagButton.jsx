@@ -40,7 +40,7 @@ export default function CommentFlagButton({galleryID, userID}){
     let report = getReportFromGalleryID(galleryID); //retrieve report
     if (report.unique_key == null) { //if report does not exist...
       //const content = getReportFromGalleryID(galleryID);
-      const content = [{id: galleryID, views: 1, author_id: 1, type: "comment", title:"", text: "hii"}];
+      const content = {id: galleryID, views: 1, author_id: 1, type: "comment", title:"", text: "hii"};
       createReport(content, userID); //create the report
       report = getReportFromGalleryID(galleryID); //assign new report
     } 
