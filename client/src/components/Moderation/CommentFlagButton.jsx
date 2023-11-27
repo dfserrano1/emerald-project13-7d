@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Less from './CommentFlagButton.less';
 import {getReportFromGalleryID} from '../../Utils/requests';
+import { updateGloballyHidden } from '../../Utils/requests';
 import {updateReporters} from '../../Utils/requests';
 import {deleteReport} from '../../Utils/requests';
 import {createReport} from '../../Utils/requests';
