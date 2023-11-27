@@ -48,13 +48,6 @@ export default function CommentFlagButton({galleryID, userID}){
       for (reporter in report.reporters) {
         newReporters.push(reporter);
       }
-    newReporters.push(userID);
-    updateReporters(report, newReporters); //add user to list of reporters
-    } else { //otherwise...
-      let newReporters = [];
-      for (reporter in report.reporters) {
-        newReporters.push(reporter);
-      }
       newReporters.push(userID);
       updateReporters(report, newReporters); //add user to list of reporters
     }
