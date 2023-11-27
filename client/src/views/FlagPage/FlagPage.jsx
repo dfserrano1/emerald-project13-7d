@@ -5,10 +5,11 @@ import "./FlagPage.less"
 
 export default function FlagPage(props) {
     const userID = 3;
+    const galleryID = 999;
     return (
         <div className="container nav-padding">
             <NavBar/>
-            <CommentFlagButton uniqueKey={ userID } />
+            <CommentFlagButton userID={userID} galleryID={galleryID}  />
         </div>
     )
 }

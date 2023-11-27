@@ -50,6 +50,13 @@ export default function CommentFlagButton({galleryID, userID}){
       }
     newReporters.push(userID);
     updateReporters(report, newReporters); //add user to list of reporters
+    } else { //otherwise...
+      let newReporters = [];
+      for (reporter in report.reporters) {
+        newReporters.push(reporter);
+      }
+      newReporters.push(userID);
+      updateReporters(report, newReporters); //add user to list of reporters
     }
     const thresholdResult = EvaluateThreshold(report); //evaluate threshold
     if (thresholdResult == HiddenStatus.GloballyHidden) { //if threshold is met...
