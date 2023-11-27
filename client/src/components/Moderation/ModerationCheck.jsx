@@ -7,8 +7,8 @@ export const HiddenStatus = {
 }
 export default function ModerationCheck({contentID, userID}){
     
-    
     const report = getReport(contentID);
+
     if(report != null) {
         // update with proper function name
         if (report.getGloballyHidden())

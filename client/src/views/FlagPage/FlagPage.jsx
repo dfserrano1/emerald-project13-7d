@@ -4,11 +4,11 @@ import CommentFlagButton from "../../components/Moderation/CommentFlagButton"
 import "./FlagPage.less"
 
 export default function FlagPage(props) {
-    const num = 3;
+    const userID = 3;
     return (
         <div className="container nav-padding">
             <NavBar/>
-            <CommentFlagButton uniqueKey={ num } />
+            <CommentFlagButton uniqueKey={ userID } />
         </div>
     )
 }

@@ -30,56 +30,34 @@ export default function CommentFlagButton({uniqueKey}){
     }
   }
 
-  function Flag() {
-    alert("The content has been flagged! Uniqiue key: " + uniqueKey);
-    setStatus("Clicked");
-    setClicked(true);
-    const report = getReport(uniqueKey);
-    if (report == null)
-    {
-      //createReport(uniqueKey);
-      report = getReport(uniqueKey);
-    } else
-    {
-      //add user to reports array
-      updateReport(report.unique_key, report.views, (report.report_count + 1), report.user_name, report.report_status, report.id);
+  function Flag() { //flag content
+    let report = getReport(uniqueKey); //retreive report
+    if (report == null) { //if report does not exist...
+      createReport(uniqueKey, userID); //create the report
+      report = getReport(uniqueKey); //assign new report
+    } else { //otherwise...
+      addReporter(report, userID); //add user to existing reporters list
     }
-    const thresholdResult = EvaluateThreshold(report);
-    if (thresholdResult == HiddenStatus.GloballyHidden)
-    {
-      //report.setGloballyHidden(globallyhidden)
-    } else if (thresholdResult == HiddenStatus.Displayed)
-    {
-      //report.setGloballyHidden(displayed)
+    const thresholdResult = EvaluateThreshold(report); //evaluate threshold
+    if (thresholdResult == HiddenStatus.GloballyHidden) { //if threshold is met...
+      report.setGloballyHidden(hide); //globally hide post
     }
-    //call locally hidden function from gallery team
+    hideContent(uniqueKey, userID); //call locally hidden function from gallery team
   }
 
-  function Unflag() {
-    alert("The content has been unflagged! Unique key: " + uniqueKey);
-    setStatus("Unclicked");
-    setClicked(false);
-    const report = getReport(uniqueKey);
-    if (report == null)
-    {
-      //throw error
-    } else
-    {
-      //remove user from reports array
-      updateReport(report.unique_key, report.views, (report.report_count - 1), report.user_name, report.report_status, report.id);
-      if (report.report_count == 0) {
-        //remove report from db
+  function Unflag() { //unflag content
+    let report = getReport(uniqueKey); //retrieve report
+    removeReporter(report, userID); //remove reporter
+      if (report.report_count == 0) //if no more reporters exist...
+        destroyReport(report); //remove report from database
+    report = getReport(uniqueKey); //see if report still exists
+    if (report != null) { //if so...
+      const thresholdResult = EvaluateThreshold(report); //reevaluate threshold
+      if (thresholdResult == HiddenStatus.Displayed) {//if threshold is not met...
+        report.setGloballyHidden(false); //globally display post
       }
     }
-    const thresholdResult = EvaluateThreshold(report);
-    if (thresholdResult == HiddenStatus.GloballyHidden)
-    {
-      //report.setGloballyHidden(globallyhidden)
-    } else if (thresholdResult == HiddenStatus.Displayed)
-    {
-      //report.setGloballyHidden(displayed)
-    }
-    //call locally unhide function from gallery team
+    hideContent(uniqueKey, userID); //call locally unhide function from gallery team
   }
 
   return (
