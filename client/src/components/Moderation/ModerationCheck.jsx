@@ -16,7 +16,7 @@ export default function ModerationCheck({galleryID, userID}){
             return HiddenStatus.GloballyHidden;
         }
         // update with proper function name
-        for (reporter in report.reporters) {
+        for (reporter in report.reporters.reporters) {
             if (userID == reporter) {
                 return HiddenStatus.LocallyHidden;
             }

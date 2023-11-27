@@ -40,14 +40,14 @@ export default function CommentFlagButton({galleryID, userID}){
     let report = getReportFromGalleryID(galleryID); //retrieve report
     if (report.unique_key == null) { //if report does not exist...
       //const content = getReportFromGalleryID(galleryID);
-      const content = {id: galleryID, views: 1, author_id: "1", type: "comment", title:"", text: "hii"};
+      const content = {id: galleryID, view_count: 1, like_count: 0 ,user_name: "liam", type: "Project", title:"", text: "hii"};
       //console.log(content.id);
       createReport(content, userID); //create the report
       report = getReportFromGalleryID(galleryID); //assign new report
     } 
     else { //otherwise...
       let newReporters = [];
-      for (reporter in report.reporters) {
+      for (reporter in report.reporters.reporters) {
         newReporters.push(reporter);
       }
       newReporters.push(userID);
@@ -66,13 +66,12 @@ export default function CommentFlagButton({galleryID, userID}){
     setClicked(false);
     let report = getReportFromGalleryID(galleryID); //retrieve report
     let newReporters = [];
-    for (reporter in report.reporters) {
+    for (reporter in report.reporters.reporters) {
       if (userID != reporter) {
           newReporters.push(reporter);
       }
     }
     updateReporters(report, newReporters); //remove reporter
-
     if (newReporters.length == 0) { //if no more reporters exist...
       deleteReport(report.id); //remove report from database
     }

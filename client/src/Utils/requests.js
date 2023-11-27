@@ -713,13 +713,13 @@ export const createReport = async (
       unique_key: content.id,  //id given by gallery team
       views: content.views,   //views given by gallery team
       report_count: 1,        //set report count to 1 on creation
-      user_name: content.author_id, //pull the student's info from gallery team
+      user_name: content.user_name, //pull the student's info from gallery team
       globally_hidden: 0,            //set globally hidden to 0 initially
-      report_status: "pending",      //set initial status to pending                   
+      report_status: "pending",      //set initial status to pending
+      reporters:{"reporters": [userId]},                    
       content_type: content.type,
       content_title: content.title,  
-      content_text: content.text,
-      reporters: {userID}
+      content_text: content.text
     },
     error: 'Unable to create report',
   });
@@ -762,7 +762,7 @@ export const updateReporters = async (
       user_name: report.user_name,
       globally_hidden: report.globally_hidden,
       report_status: report.report_status,
-      reporters: newReporters,
+      reporters: {"reporters":newReporters},
       content_type: report.content_type,
       content_title: report.content_title,
       content_text: report.content_text
