@@ -713,7 +713,7 @@ export const createReport = async (
       unique_key: content.id,  //id given by gallery team
       views: content.views,   //views given by gallery team
       report_count: 1,        //set report count to 1 on creation
-      user_name: content.author.id, //pull the student's info from gallery team
+      user_name: content.author_id, //pull the student's info from gallery team
       globally_hidden: 0,            //set globally hidden to 0 initially
       report_status: "pending",      //set initial status to pending
       reporters: {userID},                    

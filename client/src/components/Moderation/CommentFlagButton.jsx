@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Less from './CommentFlagButton.less';
 import {getReportFromGalleryID} from '../../Utils/requests';
+import { updateGloballyHidden } from '../../Utils/requests';
 import {updateReporters} from '../../Utils/requests';
 import {deleteReport} from '../../Utils/requests';
 import {createReport} from '../../Utils/requests';
@@ -39,7 +40,7 @@ export default function CommentFlagButton({galleryID, userID}){
     let report = getReportFromGalleryID(galleryID); //retrieve report
     if (report.unique_key == null) { //if report does not exist...
       //const content = getReportFromGalleryID(galleryID);
-      const content = [{id: galleryID, views: 1, author:{id: 1}, type: "comment", title:"", text: "hii"}];
+      const content = [{id: galleryID, views: 1, author_id: 1, type: "comment", title:"", text: "hii"}];
       createReport(content, userID); //create the report
       report = getReportFromGalleryID(galleryID); //assign new report
     } 
