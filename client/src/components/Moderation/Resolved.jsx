@@ -1,16 +1,48 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './Resolved.less';
 import data from './Data/MOCK_DATA.json';
 import '../../views/Administrator/Administrator.less'
+import {createReport, getReports} from '../../Utils/requests'
 
 // Resolved Tab
 export default function Resolved({isPending, updateSelected}) {
     // set data from JSON file to incidentList 
     const [incidentList, setIncidentList] = useState(data);
 
+    const [dataArray, setDataArray] = useState();
+    const [newPendingIncidents, setNewPendingIncidents] = useState();
+    const [newResolvedIncidents, setNewResolvedIncidents] = useState();
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const result = await getReports();
+                const newData = result.data;
+                setDataArray(newData);
+    
+                // Filter the data after setting the state
+                const newPending = newData.filter((incident) => incident.report_status === 0);
+                setNewPendingIncidents(newPending);
+
+                const newResolved = newData.filter((incident) => incident.report_status !== 0);
+                setNewResolvedIncidents(newResolved);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+    
+        fetchData();
+    }, []);
+
+    
+    console.log(dataArray);
+
+
+
     // filter out resolved incidents
     const [pendingIncidents, setPendingIncidents] = useState(incidentList.filter((incident) =>
-        incident.status == 0
+        incident.status < 1
     ));
 
     // filter out pending incidents
@@ -38,11 +70,10 @@ export default function Resolved({isPending, updateSelected}) {
             return(
                 <tbody>
                     {/* Map incident information to specific column */}
-                    {pendingIncidents.map((incident)=>
-                        <tr className="pending" onClick={() => updateSelected(incident.id, true)}>
-                            <td>{incident.username}</td>
-                            <td>{incident.project}</td>
-                            <td>{incident.reports}</td>
+                    {newPendingIncidents.map((incident)=>
+                        <tr className="pending" onClick={displayInfo}>
+                            <td>{incident.user_name}</td>
+                            <td>{incident.report_count}</td>
                             <td>{incident.views}</td>
                             <td>
                                 {convertStatus(incident)}
@@ -56,11 +87,10 @@ export default function Resolved({isPending, updateSelected}) {
             return(
                 <tbody>
                     {/* Map incident information to specific column */}
-                    {resolvedIncidents.map((incident)=>
-                        <tr className={incident.status==1 ? "approved" : "rejected"} onClick={() => updateSelected(incident.id, true)}>
-                            <td>{incident.username}</td>
-                            <td>{incident.project}</td>
-                            <td>{incident.reports}</td>
+                    {newResolvedIncidents.map((incident)=>
+                        <tr className={incident.report_status==1 ? "approved" : "rejected"} onClick={displayInfo}>
+                            <td>{incident.user_name}</td>
+                            <td>{incident.report_count}</td>
                             <td>{incident.views}</td>
                             <td>
                                 {convertStatus(incident)}
@@ -75,9 +105,9 @@ export default function Resolved({isPending, updateSelected}) {
 
     // change status from integer to string
     function convertStatus(incident) {
-        if (incident.status == 1){
+        if (incident.report_status == 1){
             return "Approved";
-        } else if (incident.status == 2) {
+        } else if (incident.report_status == 2) {
             return "Rejected";
         } else {
             return "Pending";
@@ -97,7 +127,6 @@ export default function Resolved({isPending, updateSelected}) {
                             {/* Table Column Names */}
                             <tr>
                                 <th>Username</th>
-                                <th>Project Name</th>
                                 <th># of Reports</th>
                                 <th># of Views</th>
                                 <th>Status</th>
