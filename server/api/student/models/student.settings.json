@@ -34,7 +34,7 @@
       "type": "datetime"
     },
     "report": {
-      "via": "students",
+      "via": "reporters",
       "model": "reports"
     }
   }

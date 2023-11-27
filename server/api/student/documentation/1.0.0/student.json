@@ -811,11 +811,20 @@
               "report_status": {
                 "type": "string"
               },
-              "students": {
+              "reporters": {
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
+              },
+              "content_type": {
+                "type": "string"
+              },
+              "content_title": {
+                "type": "string"
+              },
+              "content_text": {
+                "type": "string"
               },
               "published_at": {
                 "type": "string"
