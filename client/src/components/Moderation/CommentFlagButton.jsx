@@ -42,7 +42,8 @@ export default function CommentFlagButton({galleryID, userID}){
       const content = [{id: galleryID, views: 1, author:{id: 1}, type: "comment", title:"", text: "hii"}];
       createReport(content, userID); //create the report
       report = getReportFromGalleryID(galleryID); //assign new report
-    } else { //otherwise...
+    } 
+    else { //otherwise...
       let newReporters = [];
       for (reporter in report.reporters) {
         newReporters.push(reporter);

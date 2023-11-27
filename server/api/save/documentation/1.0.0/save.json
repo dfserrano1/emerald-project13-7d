@@ -675,9 +675,6 @@
               "last_logged_in": {
                 "type": "string"
               },
-              "report": {
-                "type": "string"
-              },
               "created_by": {
                 "type": "string"
               },

@@ -784,58 +784,6 @@
           "last_logged_in": {
             "type": "string",
             "format": "date-time"
-          },
-          "report": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "unique_key": {
-                "type": "integer"
-              },
-              "views": {
-                "type": "integer"
-              },
-              "report_count": {
-                "type": "integer"
-              },
-              "user_name": {
-                "type": "string"
-              },
-              "globally_hidden": {
-                "type": "integer"
-              },
-              "report_status": {
-                "type": "string"
-              },
-              "reporters": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "content_type": {
-                "type": "string"
-              },
-              "content_title": {
-                "type": "string"
-              },
-              "content_text": {
-                "type": "string"
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
           }
         }
       },
@@ -866,9 +814,6 @@
           "last_logged_in": {
             "type": "string",
             "format": "date-time"
-          },
-          "report": {
-            "type": "string"
           },
           "created_by": {
             "type": "string"
