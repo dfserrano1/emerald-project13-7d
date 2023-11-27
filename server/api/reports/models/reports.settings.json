@@ -24,8 +24,24 @@
     "user_name": {
       "type": "string"
     },
-    "report_status": {
+    "globally_hidden": {
       "type": "integer"
+    },
+    "report_status": {
+      "type": "string"
+    },
+    "reporters": {
+      "collection": "student",
+      "via": "report"
+    },
+    "content_type": {
+      "type": "string"
+    },
+    "content_title": {
+      "type": "string"
+    },
+    "content_text": {
+      "type": "string"
     }
   }
 }
