@@ -540,6 +540,9 @@
           "report_status": {
             "type": "string"
           },
+          "users_reporting": {
+            "type": "object"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -565,6 +568,9 @@
           },
           "report_status": {
             "type": "string"
+          },
+          "users_reporting": {
+            "type": "object"
           },
           "published_at": {
             "type": "string",
