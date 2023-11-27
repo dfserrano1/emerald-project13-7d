@@ -534,14 +534,11 @@
           "user_name": {
             "type": "string"
           },
-          "globally_hidden": {
-            "type": "integer"
-          },
           "report_status": {
             "type": "string"
           },
-          "users_reporting": {
-            "type": "object"
+          "globally_hidden": {
+            "type": "integer"
           },
           "published_at": {
             "type": "string",
@@ -563,14 +560,11 @@
           "user_name": {
             "type": "string"
           },
-          "globally_hidden": {
+          "report_status": {
             "type": "integer"
           },
-          "report_status": {
-            "type": "string"
-          },
-          "users_reporting": {
-            "type": "object"
+          "globally_hidden": {
+            "type": "integer"
           },
           "published_at": {
             "type": "string",
