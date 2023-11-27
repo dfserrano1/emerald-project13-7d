@@ -37,9 +37,9 @@ export default function CommentFlagButton({galleryID, userID}){
     setStatus("Clicked");
     setClicked(true);
     let report = getReportFromGalleryID(galleryID); //retrieve report
-    if (report == null) { //if report does not exist...
+    if (report.unique_key == null) { //if report does not exist...
       //const content = getReportFromGalleryID(galleryID);
-      const content = [{id: 0, views: 1, author:{id: 1}, type: "comment", title:"", text: "hii"}];
+      const content = [{id: galleryID, views: 1, author:{id: 1}, type: "comment", title:"", text: "hii"}];
       createReport(content, userID); //create the report
       report = getReportFromGalleryID(galleryID); //assign new report
     } else { //otherwise...
