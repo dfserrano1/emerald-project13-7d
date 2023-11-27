@@ -1,5 +1,6 @@
 import data from './Data/MOCK_DATA.json';
 import ActionButtons from "../../components/Moderation/ActionButtons";
+import OpenButton from "../../components/Moderation/OpenButton";
 import "./ViewIncident.less";
 
 function ViewIncident({ id, isProject }) {
@@ -68,6 +69,7 @@ function ViewIncident({ id, isProject }) {
           {isProject ? null : <div><b>Comment:</b> {commentText}</div>}
           <br />
           <ActionButtons reportID={id} display={setActionButtonDisplay()} />
+          <OpenButton />
         </div>
       );
     }
