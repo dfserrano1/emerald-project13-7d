@@ -682,7 +682,7 @@ export const getReport = async (id) =>
     error: 'Unable to retrive report',
   });
 
-  //most likely need to change this to get a single report as this will allow the passing of an object into the update/create functions
+  //gets a list of reports which can be parsed for further data
   export const getReports = async () => 
     makeRequest({
       method: GET,
@@ -697,6 +697,7 @@ export const getReport = async (id) =>
       views,
       report_count,
       user_name,
+      globally_hidden,
       report_status
     ) =>
       makeRequest({
@@ -708,7 +709,8 @@ export const getReport = async (id) =>
           views,
           report_count,
           user_name,
-          report_status,
+          globally_hidden,
+          report_status
         },
         error: 'Unable to create report',
       });
@@ -719,6 +721,7 @@ export const getReport = async (id) =>
         views,
         report_count,
         user_name,
+        globally_hidden,
         report_status,
         id
       ) =>
@@ -730,6 +733,7 @@ export const getReport = async (id) =>
             views: views,
             report_count: report_count,
             user_name: user_name,
+            globally_hidden: globally_hidden,
             report_status: report_status,
           },
           auth: true,
