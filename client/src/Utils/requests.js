@@ -8,7 +8,7 @@ const POST = 'POST';
 const DELETE = 'DELETE';
 
 // all request functions should utilize makeRequest and return an obj with structure {data, err}
-const makeRequest = async ({ method, path, data, auth = false, error }) => {
+const makeRequest = async ({ method, path, data, auth = false, params = null, error }) => {
   //console.log(data);
   let res = null;
   let err = null;
@@ -23,7 +23,7 @@ const makeRequest = async ({ method, path, data, auth = false, error }) => {
   try {
     switch (method) {
       case GET:
-        res = (await axios.get(path, config)).data;
+        res = (await axios.get(path, params, config)).data;
         break;
       case POST:
         res = (await axios.post(path, data, config)).data;
@@ -679,6 +679,15 @@ export const getReport = async (id) =>
     method: GET,
     path: `${server}/reports/${id}`,
     auth: true,
+    error: 'Unable to retrive report',
+  });
+
+  export const getReportFromGalleryID = async (galleryID) =>
+  makeRequest({
+    method: GET,
+    path: `${server}/reports`,
+    auth: true,
+    params: {params: {unique_key: galleryID}},
     error: 'Unable to retrive report',
   });
 

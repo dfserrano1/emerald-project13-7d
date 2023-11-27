@@ -1,22 +1,22 @@
-import {getReport} from '../../Utils/requests';
+import {getReportFromGalleryID} from '../../Utils/requests';
 // also import other functions used
 export const HiddenStatus = {
     Displayed: 0,
     LocallyHidden: 1,
     GloballyHidden: 2
 }
-export default function ModerationCheck({contentID, userID}){
+export default function ModerationCheck({galleryID, userID}){
     
-    const report = getReport(contentID);
+    const report = getReportFromGalleryID(galleryID);
 
     if(report != null) {
         // update with proper function name
-        if (report.getGloballyHidden())
+        if (report.globally_hidden == 1)
         {
             return HiddenStatus.GloballyHidden;
         }
         // update with proper function name
-        for (reporter in report.getReporters()) {
+        for (reporter in report.reporters) {
             if (userID == reporter) {
                 return HiddenStatus.LocallyHidden;
             }
