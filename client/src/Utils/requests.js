@@ -716,7 +716,7 @@ export const createReport = async (
       user_name: content.user_name, //pull the student's info from gallery team
       globally_hidden: 0,            //set globally hidden to 0 initially
       report_status: "pending",      //set initial status to pending
-      reporters:{"reporters": [userId]},                    
+      reporters:{"reporters": [userID]},                    
       content_type: content.type,
       content_title: content.title,  
       content_text: content.text
