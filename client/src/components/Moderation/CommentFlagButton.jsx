@@ -42,11 +42,12 @@ export default function CommentFlagButton({galleryID, userID}){
       const content = [{id: 0, views: 1, author:{id: 1}, type: "comment", title:"", text: "hii"}];
       createReport(content, userID); //create the report
       report = getReportFromGalleryID(galleryID); //assign new report
-    } else { //otherwise...
-    let newReporters = [];
-    for (reporter in report.reporters) {
-      newReporters.push(reporter);
-    }
+    } 
+    else { //otherwise...
+      let newReporters = [];
+      for (reporter in report.reporters) {
+        newReporters.push(reporter);
+      }
     newReporters.push(userID);
     updateReporters(report, newReporters); //add user to list of reporters
     }
