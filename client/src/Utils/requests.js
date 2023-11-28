@@ -683,7 +683,8 @@ export const getReport = async (id) =>
     error: 'Unable to retrive report',
   });
 
-  export const getReportFromGalleryID = async (galleryID) =>
+//gets a report based off of the unique_key in the database
+export const getReportFromGalleryID = async (galleryID) =>
   makeRequest({
     method: GET,
     path: `${server}/reports`,
@@ -692,18 +693,18 @@ export const getReport = async (id) =>
     error: 'Unable to retrive report',
   });
 
-  //most likely need to change this to get a single report as this will allow the passing of an object into the update/create functions
-  export const getReports = async () => 
-    makeRequest({
-      method: GET,
-      path: `${server}/reports`,
-      auth: true,
-      error: 'Unable to retrive reports',
-    });
+//most likely need to change this to get a single report as this will allow the passing of an object into the update/create functions
+export const getReports = async () => 
+  makeRequest({
+    method: GET,
+    path: `${server}/reports`,
+    auth: true,
+    error: 'Unable to retrive reports',
+  });
 
 //when the flag button is pressed, this function is called to create a report in the database
 export const createReport = async (
-  content, userID
+  content, user
   ) =>
   makeRequest({
     method: POST,
@@ -716,10 +717,10 @@ export const createReport = async (
       user_name: content.user_name, //pull the student's info from gallery team
       globally_hidden: 0,            //set globally hidden to 0 initially
       report_status: "pending",      //set initial status to pending
-      reporters:{"reporters": [userID]},                    
-      content_type: content.type,
-      content_title: content.title,  
-      content_text: content.text
+      students: user,                    
+      content_type: content.type,    //from gallery team
+      content_title: content.title,  //from gallery team
+      content_text: content.text     //from gallery team
     },
     error: 'Unable to create report',
   });

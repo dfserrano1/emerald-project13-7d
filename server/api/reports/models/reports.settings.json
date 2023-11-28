@@ -39,8 +39,9 @@
     "content_text": {
       "type": "string"
     },
-    "reporters": {
-      "type": "json"
+    "students": {
+      "collection": "student",
+      "via": "report"
     }
   }
 }
