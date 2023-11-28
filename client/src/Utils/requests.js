@@ -711,7 +711,7 @@ export const createReport = async (
     auth: true,
     data: {
       unique_key: content.id,  //id given by gallery team
-      views: content.views,   //views given by gallery team
+      views: content.view_count,   //views given by gallery team
       report_count: 1,        //set report count to 1 on creation
       user_name: content.user_name, //pull the student's info from gallery team
       globally_hidden: 0,            //set globally hidden to 0 initially

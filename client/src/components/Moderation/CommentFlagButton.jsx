@@ -72,8 +72,9 @@ export default function CommentFlagButton({galleryID, userID}){
       }
     }
     updateReporters(report, newReporters); //remove reporter
+    deleteReport(report.id);
     if (newReporters.length == 0) { //if no more reporters exist...
-      deleteReport(report.id); //remove report from database
+       //remove report from database
     }
     report = getReportFromGalleryID(galleryID); //see if report still exists
     if (report != null) { //if so...
