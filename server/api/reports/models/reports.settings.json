@@ -24,9 +24,6 @@
     "user_name": {
       "type": "string"
     },
-    "globally_hidden": {
-      "type": "integer"
-    },
     "report_status": {
       "type": "string"
     },
@@ -42,6 +39,9 @@
     "students": {
       "collection": "student",
       "via": "report"
+    },
+    "globally_hidden": {
+      "type": "boolean"
     }
   }
 }

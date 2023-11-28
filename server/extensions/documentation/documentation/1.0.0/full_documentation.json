@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "11/27/2023 10:18:49 PM"
+    "x-generation-date": "11/28/2023 11:00:30 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -12799,6 +12799,9 @@
                 "last_logged_in": {
                   "type": "string"
                 },
+                "report": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -13646,9 +13649,6 @@
           "user_name": {
             "type": "string"
           },
-          "globally_hidden": {
-            "type": "integer"
-          },
           "report_status": {
             "type": "string"
           },
@@ -13661,8 +13661,52 @@
           "content_text": {
             "type": "string"
           },
-          "reporters": {
-            "type": "object"
+          "students": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "enrolled"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "character": {
+                  "type": "string"
+                },
+                "classroom": {
+                  "type": "string"
+                },
+                "sessions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "enrolled": {
+                  "type": "boolean"
+                },
+                "last_logged_in": {
+                  "type": "string"
+                },
+                "report": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "globally_hidden": {
+            "type": "boolean"
           },
           "published_at": {
             "type": "string",
@@ -13684,9 +13728,6 @@
           "user_name": {
             "type": "string"
           },
-          "globally_hidden": {
-            "type": "integer"
-          },
           "report_status": {
             "type": "string"
           },
@@ -13699,8 +13740,14 @@
           "content_text": {
             "type": "string"
           },
-          "reporters": {
-            "type": "object"
+          "students": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "globally_hidden": {
+            "type": "boolean"
           },
           "published_at": {
             "type": "string",
@@ -13805,6 +13852,9 @@
                 "type": "boolean"
               },
               "last_logged_in": {
+                "type": "string"
+              },
+              "report": {
                 "type": "string"
               },
               "created_by": {
@@ -14284,6 +14334,9 @@
                 "last_logged_in": {
                   "type": "string"
                 },
+                "report": {
+                  "type": "string"
+                },
                 "created_by": {
                   "type": "string"
                 },
@@ -14673,6 +14726,58 @@
           "last_logged_in": {
             "type": "string",
             "format": "date-time"
+          },
+          "report": {
+            "required": [
+              "id"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "unique_key": {
+                "type": "integer"
+              },
+              "views": {
+                "type": "integer"
+              },
+              "report_count": {
+                "type": "integer"
+              },
+              "user_name": {
+                "type": "string"
+              },
+              "report_status": {
+                "type": "string"
+              },
+              "content_type": {
+                "type": "string"
+              },
+              "content_title": {
+                "type": "string"
+              },
+              "content_text": {
+                "type": "string"
+              },
+              "students": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "globally_hidden": {
+                "type": "boolean"
+              },
+              "published_at": {
+                "type": "string"
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
+              }
+            }
           }
         }
       },
@@ -14703,6 +14808,9 @@
           "last_logged_in": {
             "type": "string",
             "format": "date-time"
+          },
+          "report": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"

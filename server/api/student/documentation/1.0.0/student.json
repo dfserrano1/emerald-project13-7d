@@ -805,9 +805,6 @@
               "user_name": {
                 "type": "string"
               },
-              "globally_hidden": {
-                "type": "integer"
-              },
               "report_status": {
                 "type": "string"
               },
@@ -825,6 +822,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "globally_hidden": {
+                "type": "boolean"
               },
               "published_at": {
                 "type": "string"
