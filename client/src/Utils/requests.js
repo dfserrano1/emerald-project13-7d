@@ -715,12 +715,12 @@ export const createReport = async (
       views: content.view_count,   //views given by gallery team
       report_count: 1,        //set report count to 1 on creation
       user_name: content.user_name, //pull the student's info from gallery team
-      globally_hidden: 0,            //set globally hidden to 0 initially
       report_status: "pending",      //set initial status to pending
       students: user,                    
       content_type: content.type,    //from gallery team
       content_title: content.title,  //from gallery team
-      content_text: content.text     //from gallery team
+      content_text: content.text,     //from gallery team
+      globally_hidden: false            //set globally hidden to 0 initially
     },
     error: 'Unable to create report',
   });
@@ -751,7 +751,7 @@ export const updateReport = async (
   });
 
 export const updateReporters = async (
-  report, newReporters
+  report, newReporter
 ) =>
   makeRequest({
     method: PUT,
@@ -761,12 +761,12 @@ export const updateReporters = async (
       views: report.views,
       report_count: newReporters.length,
       user_name: report.user_name,
-      globally_hidden: report.globally_hidden,
       report_status: report.report_status,
-      reporters: {"reporters":newReporters},
       content_type: report.content_type,
       content_title: report.content_title,
-      content_text: report.content_text
+      content_text: report.content_text,
+      students: newReporter,
+      globally_hidden: report.globally_hidden
     },
     auth: true,
     error: 'Failed to add reporter to the report',
