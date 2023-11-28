@@ -800,3 +800,12 @@ export const deleteReport = async (id) =>
     auth: true,
     error: 'Failed to delete report.',
   });
+  
+export const deleteReportFromGalleryID = async (galleryID) =>
+  makeRequest({
+    method: DELETE,
+    path: `${server}/reports`,
+    auth: true,
+    params: {params: {unique_key: galleryID}},
+    error: 'Unable to delete report',
+  });

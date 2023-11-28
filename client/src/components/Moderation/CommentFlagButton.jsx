@@ -6,6 +6,7 @@ import {updateReporters} from '../../Utils/requests';
 import {deleteReport} from '../../Utils/requests';
 import {createReport} from '../../Utils/requests';
 import {updateReport} from '../../Utils/requests';
+import {deleteReportFromGalleryID} from '../../Utils/requests';
 import {HiddenStatus} from './ModerationCheck.jsx';
 import { Button } from 'antd';
 
@@ -64,25 +65,30 @@ export default function CommentFlagButton({galleryID, userID}){
     alert("The content has been unflagged! Unique key: " + galleryID);
     setStatus("Unclicked");
     setClicked(false);
-    let report = getReportFromGalleryID(galleryID); //retrieve report
+    getReportFromGalleryID(galleryID).then(report =>{
+      console.log(report.data[0])
+    }) //retrieve report
+    .catch(error => {
+      console.log("Couldn't retrieve report data");
+    })
     let newReporters = [];
-    for (reporter in report.reporters.reporters) {
-      if (userID != reporter) {
-          newReporters.push(reporter);
-      }
-    }
-    updateReporters(report, newReporters); //remove reporter
-    deleteReport(report.id);
+    //for (reporter in report.reporters.reporters) {
+      //if (userID != reporter) {
+          //newReporters.push(reporter);
+      //}
+    //}
+    //updateReporters(report, newReporters); //remove reporter
+    deleteReport(116);
     if (newReporters.length == 0) { //if no more reporters exist...
        //remove report from database
     }
-    report = getReportFromGalleryID(galleryID); //see if report still exists
-    if (report != null) { //if so...
-      const thresholdResult = EvaluateThreshold(report); //reevaluate threshold
-      if (thresholdResult == HiddenStatus.Displayed) { //if threshold is not met...
-        updateGloballyHidden(report, 0); //globally display post
-      }
-    }
+    // report = getReportFromGalleryID(galleryID); //see if report still exists
+    // if (report != null) { //if so...
+    //   const thresholdResult = EvaluateThreshold(report); //reevaluate threshold
+    //   if (thresholdResult == HiddenStatus.Displayed) { //if threshold is not met...
+    //     updateGloballyHidden(report, 0); //globally display post
+    //   }
+    // }
     //hideContent(galleryID, userID); //call locally unhide function from gallery team
   }
 
