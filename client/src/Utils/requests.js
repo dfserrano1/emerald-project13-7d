@@ -792,7 +792,7 @@ export const updateGloballyHidden = async (
     },
     auth: true,
     error: 'Failed to update report globally hidden status',
-  });
+});
 
 export const deleteReport = async (id) =>
   makeRequest({
@@ -809,4 +809,17 @@ export const deleteReportFromGalleryID = async (galleryID) =>
     auth: true,
     params: {params: {unique_key: galleryID}},
     error: 'Unable to delete report',
+  });
+
+export const updateReportStatus = async (
+    id, reportStatus
+  ) =>
+    makeRequest({
+      method: PUT,
+      path: `${server}/reports/${id}`,
+      data: {
+        report_status: reportStatus
+      },
+      auth: true,
+      error: 'Failed to update report status',
   });
