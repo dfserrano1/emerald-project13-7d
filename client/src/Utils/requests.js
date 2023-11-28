@@ -23,7 +23,7 @@ const makeRequest = async ({ method, path, data, auth = false, params = null, er
   try {
     switch (method) {
       case GET:
-        res = (await axios.get(path, params, config)).data;
+        res = (await axios.get(path, config)).data;
         break;
       case POST:
         res = (await axios.post(path, data, config)).data;
@@ -33,6 +33,9 @@ const makeRequest = async ({ method, path, data, auth = false, params = null, er
         break;
       case DELETE:
         res = (await axios.delete(path, config)).data;
+        break;
+      case SEARCH:
+        res = (await axios.get(path, params, config)).data;
         break;
       default:
         throw Error('Invalid method.');
@@ -686,7 +689,7 @@ export const getReport = async (id) =>
 //gets a report based off of the unique_key in the database
 export const getReportFromGalleryID = async (galleryID) =>
   makeRequest({
-    method: GET,
+    method: SEARCH,
     path: `${server}/reports`,
     auth: true,
     params: {params: {unique_key: galleryID}},
