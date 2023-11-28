@@ -773,22 +773,13 @@ export const updateReporters = async (
   });
 
 export const updateGloballyHidden = async (
-  report, globallyHidden
+  id, globallyHidden
 ) =>
   makeRequest({
     method: PUT,
-    path: `${server}/reports/${report.id}`,
+    path: `${server}/reports/${id}`,
     data: {
-      unique_key: report.unique_key,
-      views: report.views,
-      report_count: report.report_count,
-      user_name: report.user_name,
       globally_hidden: globallyHidden,
-      report_status: report.report_status,
-      reporters : report.reporters, 
-      content_type: report.content_type,
-      content_title: report.content_title,
-      content_text: report.content_text
     },
     auth: true,
     error: 'Failed to update report globally hidden status',
