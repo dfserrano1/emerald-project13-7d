@@ -1,6 +1,6 @@
 import React from 'react';
 import './ActionButtons.less';
-import { getReport, updateReport } from "../../Utils/requests";
+import { getReport, updateReport, updateGloballyHidden } from "../../Utils/requests";
 import { Button } from 'antd';
 
 export default function ActionButtons({reportID, display = 0}) {
@@ -14,7 +14,7 @@ export default function ActionButtons({reportID, display = 0}) {
     updateReport(report.unique_key, report.views, report.report_count, report.user_name, 1, reportID);
 
     // Remove hidden status from gallery, if hidden
-
+    updateGloballyHidden(reportID, 0);
   }
 
   function Reject() {
@@ -26,7 +26,7 @@ export default function ActionButtons({reportID, display = 0}) {
     updateReport(report.unique_key, report.views, report.report_count, report.user_name, 2, reportID);
 
     // Enabling hiding post from gallery if not already hidden
-    
+    updateGloballyHidden(report, 1);
   }
 
   if (display == 0) {
