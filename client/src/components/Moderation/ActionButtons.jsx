@@ -23,7 +23,7 @@ export default function ActionButtons({reportID, display = 0}) {
 
     // Use setter from requests.js to update status column as rejected
     const report = getReport(reportID);
-    updateReport(report.unique_key, report.views, 0, report.user_name, 2, reportID);
+    updateReport(report.unique_key, report.views, report.report_count, report.user_name, 2, reportID);
 
     // Enabling hiding post from gallery if not already hidden
     
