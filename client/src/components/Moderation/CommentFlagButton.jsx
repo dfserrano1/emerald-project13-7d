@@ -10,7 +10,7 @@ import {deleteReportFromGalleryID} from '../../Utils/requests';
 import {HiddenStatus} from './ModerationCheck.jsx';
 import { Button } from 'antd';
 
-export default function CommentFlagButton({galleryID, userID}){
+export default function CommentFlagButton({galleryID}){
 
   let [status, setStatus] = useState("Unclicked");
   let [clicked, setClicked] = useState(false);
@@ -40,10 +40,11 @@ export default function CommentFlagButton({galleryID, userID}){
     setClicked(true);
     let report = getReportFromGalleryID(galleryID); //retrieve report
     if (report.unique_key == null) { //if report does not exist...
-      //const content = getReportFromGalleryID(galleryID);
       const content = {id: galleryID, view_count: 1, like_count: 0 ,user_name: "liam", type: "Project", title:"", text: "hii"};
       //console.log(content.id);
-      createReport(content, userID); //create the report
+      sessionStorage.getItem('user').then(user =>{
+        createReport(content, user.data[0])
+      }) //create the report
       report = getReportFromGalleryID(galleryID); //assign new report
     } 
     else { //otherwise...
