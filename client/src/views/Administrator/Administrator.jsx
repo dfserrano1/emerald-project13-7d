@@ -14,7 +14,7 @@ export default function Administrator(props) {
       <div className="container nav-padding">
         <NavBar />
         <Resolved/>
-        <ActionButtons reportID={1} />
+        <ActionButtons reportID={2} />
       </div>
     )
   } else {
