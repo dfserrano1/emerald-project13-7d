@@ -534,8 +534,64 @@
           "user_name": {
             "type": "string"
           },
-          "report_status": {
+          "globally_hidden": {
             "type": "integer"
+          },
+          "report_status": {
+            "type": "string"
+          },
+          "content_type": {
+            "type": "string"
+          },
+          "content_title": {
+            "type": "string"
+          },
+          "content_text": {
+            "type": "string"
+          },
+          "students": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "enrolled"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "character": {
+                  "type": "string"
+                },
+                "classroom": {
+                  "type": "string"
+                },
+                "sessions": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "enrolled": {
+                  "type": "boolean"
+                },
+                "last_logged_in": {
+                  "type": "string"
+                },
+                "report": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "published_at": {
             "type": "string",
@@ -557,8 +613,26 @@
           "user_name": {
             "type": "string"
           },
-          "report_status": {
+          "globally_hidden": {
             "type": "integer"
+          },
+          "report_status": {
+            "type": "string"
+          },
+          "content_type": {
+            "type": "string"
+          },
+          "content_title": {
+            "type": "string"
+          },
+          "content_text": {
+            "type": "string"
+          },
+          "students": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "published_at": {
             "type": "string",
