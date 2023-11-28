@@ -13,7 +13,7 @@ export default function ActionButtons({reportID, display = 0}) {
     updateReportStatus(reportID, "approved")
 
     // Remove hidden status from gallery, if hidden
-    // updateGloballyHidden(reportID, 0);
+    updateGloballyHidden(reportID, 0);
   }
 
   function Reject() {
@@ -24,7 +24,7 @@ export default function ActionButtons({reportID, display = 0}) {
     updateReportStatus(reportID, "rejected")
 
     // Enabling hiding post from gallery if not already hidden
-    // updateGloballyHidden(reportID, 1);
+    updateGloballyHidden(reportID, 1);
   }
 
   if (display == 0) {
