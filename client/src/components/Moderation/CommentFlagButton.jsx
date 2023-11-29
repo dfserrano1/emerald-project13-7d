@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Less from './CommentFlagButton.less';
-import {getReportFromGalleryID} from '../../Utils/requests';
+import {getReportFromGalleryID, getStudent} from '../../Utils/requests';
 import { updateGloballyHidden } from '../../Utils/requests';
 import {updateReporters} from '../../Utils/requests';
 import {deleteReport} from '../../Utils/requests';
@@ -42,18 +42,30 @@ export default function CommentFlagButton({galleryID}){
     if (report.unique_key == null) { //if report does not exist...
       const content = {id: galleryID, view_count: 1, like_count: 0 ,user_name: "liam", type: "Project", title:"", text: "hii"};
       //console.log(content.id);
-      sessionStorage.getItem('user').then(user =>{
-        createReport(content, user.data[0])
+      let studentID = sessionStorage.getItem('user')
+      if(studentID){
+        studentID = studentID.substring(1, studentID.length - 1);
+      }
+      console.log(studentID);
+      console.log(getStudent(studentID));
+      getStudent(studentID).then(student =>{
+        createReport(content, student.data)
+        console.log(student.data)
       }) //create the report
       report = getReportFromGalleryID(galleryID); //assign new report
     } 
     else { //otherwise...
-      let newReporters = [];
-      for (reporter in report.reporters.reporters) {
-        newReporters.push(reporter);
+      let newReporters = report.students;
+      let studentID = sessionStorage.getItem('user')
+      if(studentID){
+        studentID = studentID.substring(1, studentID.length - 1);
       }
-      newReporters.push(userID);
-      updateReporters(report, newReporters); //add user to list of reporters
+      getStudent(studentID).then(student =>{
+        newReporters.push(student.data);
+        updateReporters(report, newReporters); //add user to list of reporters
+        console.log(student.data)
+      })
+      
     }
     const thresholdResult = EvaluateThreshold(report); //evaluate threshold
     if (thresholdResult == HiddenStatus.GloballyHidden) { //if threshold is met...

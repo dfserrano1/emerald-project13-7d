@@ -5,4 +5,10 @@
  * to customize this controller
  */
 
-module.exports = {};
+module.exports = {
+    async findByGallery(ctx) {
+        const {uid} = ctx.params
+        let report = await strapi.services.reports.findOne({unique_key: uid})
+        return sanitizeEntity(report, {model: strapi.models.reports})
+    }
+};

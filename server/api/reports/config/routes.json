@@ -25,6 +25,14 @@
       }
     },
     {
+      "method": "GET",
+      "path": "/reports/getByGallery/:uid",
+      "handler": "reports.findByGallery",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "POST",
       "path": "/reports",
       "handler": "reports.create",
