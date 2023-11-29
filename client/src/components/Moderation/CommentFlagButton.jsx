@@ -6,7 +6,6 @@ import {updateReporters} from '../../Utils/requests';
 import {deleteReport} from '../../Utils/requests';
 import {createReport} from '../../Utils/requests';
 import {updateReport} from '../../Utils/requests';
-import {deleteReportFromGalleryID} from '../../Utils/requests';
 import {HiddenStatus} from './ModerationCheck.jsx';
 import { Button } from 'antd';
 
