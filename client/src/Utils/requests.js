@@ -6,6 +6,7 @@ const GET = 'GET';
 const PUT = 'PUT';
 const POST = 'POST';
 const DELETE = 'DELETE';
+const SEARCH = 'SEARCH';
 
 // all request functions should utilize makeRequest and return an obj with structure {data, err}
 const makeRequest = async ({ method, path, data, auth = false, params = null, error }) => {
@@ -754,7 +755,7 @@ export const updateReport = async (
   });
 
 export const updateReporters = async (
-  report, newReporterArray
+  report, newReportersArray
 ) =>
   makeRequest({
     method: PUT,
@@ -762,13 +763,13 @@ export const updateReporters = async (
     data: {
       unique_key: report.unique_key,
       views: report.views,
-      report_count: newReporters.length,
+      report_count: newReportersArray.length,
       user_name: report.user_name,
       report_status: report.report_status,
       content_type: report.content_type,
       content_title: report.content_title,
       content_text: report.content_text,
-      students: newReporterArray,
+      students: newReportersArray,
       globally_hidden: report.globally_hidden
     },
     auth: true,
