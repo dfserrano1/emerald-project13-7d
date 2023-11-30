@@ -6,6 +6,7 @@ const GET = 'GET';
 const PUT = 'PUT';
 const POST = 'POST';
 const DELETE = 'DELETE';
+const SEARCH = 'SEARCH';
 
 // all request functions should utilize makeRequest and return an obj with structure {data, err}
 const makeRequest = async ({ method, path, data, auth = false, params = null, error }) => {
@@ -719,7 +720,7 @@ export const createReport = async (
       report_count: 1,        //set report count to 1 on creation
       user_name: content.user_name, //pull the student's info from gallery team
       report_status: "pending",      //set initial status to pending
-      students: user,                    
+      students: [user],                    
       content_type: content.type,    //from gallery team
       content_title: content.title,  //from gallery team
       content_text: content.text,     //from gallery team
@@ -754,7 +755,7 @@ export const updateReport = async (
   });
 
 export const updateReporters = async (
-  report, newReporter
+  report, newReportersArray
 ) =>
   makeRequest({
     method: PUT,
@@ -762,13 +763,13 @@ export const updateReporters = async (
     data: {
       unique_key: report.unique_key,
       views: report.views,
-      report_count: newReporters.length,
+      report_count: newReportersArray.length,
       user_name: report.user_name,
       report_status: report.report_status,
       content_type: report.content_type,
       content_title: report.content_title,
       content_text: report.content_text,
-      students: newReporter,
+      students: newReportersArray,
       globally_hidden: report.globally_hidden
     },
     auth: true,
@@ -796,15 +797,6 @@ export const deleteReport = async (id) =>
     error: 'Failed to delete report.',
   });
   
-export const deleteReportFromGalleryID = async (galleryID) =>
-  makeRequest({
-    method: DELETE,
-    path: `${server}/reports`,
-    auth: true,
-    params: {params: {unique_key: galleryID}},
-    error: 'Unable to delete report',
-  });
-
 export const updateReportStatus = async (
     id, reportStatus
   ) =>
