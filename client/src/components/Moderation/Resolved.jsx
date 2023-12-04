@@ -4,56 +4,70 @@ import '../../views/Administrator/Administrator.less';
 import { getReports } from '../../Utils/requests';
 
 export default function Resolved({isPending, updateSelectedIncident}) {
-  const [dataArray, setDataArray] = useState([]);
-  const [newPendingIncidents, setNewPendingIncidents] = useState([]);
-  const [newResolvedIncidents, setNewResolvedIncidents] = useState([]);
-  const [newPendingIncidentsComments, setNewPendingIncidentsComments] = useState([]);
-  const [newResolvedIncidentsComments, setNewResolvedIncidentsComments] = useState([]);
+  const [pendingProjects, setPendingProjects] = useState([]);
+  const [resolvedProjects, setResolvedProjects] = useState([]);
+  const [pendingComments, setPendingComments] = useState([]);
+  const [resolvedComments, setResolvedComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // Retrieves incident data from Reports table of DB.
     const fetchData = async () => {
       try {
         const result = await getReports();
-        const newData = result.data;
-        setDataArray(newData);
+        const data = result.data; // Array of all reported incidents in the DB.
 
-        // Filter the data after setting the state
-        const newPending = newData.filter((incident) => incident.report_status === "pending" && incident.content_type === "project");
-        setNewPendingIncidents(newPending);
+        // Filter data into pendingProjects/resolvedProjects/pendingComments/resolvedComments.
+        const filter1 = data.filter((incident) =>
+          incident.report_status === "pending" && incident.content_type === "project"
+        );
+        setPendingProjects(filter1);
 
-        const newResolved = newData.filter((incident) => incident.report_status !== "pending" && incident.content_type === "project");
-        setNewResolvedIncidents(newResolved);
+        const filter2 = data.filter((incident) =>
+          incident.report_status !== "pending" && incident.content_type === "project"
+        );
+        setResolvedProjects(filter2);
 
-        const newPendingComments = newData.filter((incident) => incident.report_status === "pending" && incident.content_type === "comment");
-        setNewPendingIncidentsComments(newPendingComments);
+        const filter3 = data.filter((incident) =>
+          incident.report_status === "pending" && incident.content_type === "comment"
+        );
+        setPendingComments(filter3);
 
-        const newResolvedComments = newData.filter((incident) => incident.report_status !== "pending" && incident.content_type === "comment");
-        setNewResolvedIncidentsComments(newResolvedComments);
+        const filter4 = data.filter((incident) =>
+          incident.report_status !== "pending" && incident.content_type === "comment"
+        );
+        setResolvedComments(filter4);
       }
       catch (error) {
         console.error("Error fetching data:", error);
-        setError("Error fetching data");
+        setError("Error fetching data!");
       }
       finally {
-        setLoading(false);
+        setLoading(false); // All incidents have been retrieved.
       }
     };
 
     fetchData();
   }, []);
 
-  console.log(dataArray);
+  if (loading) {
+    // Needed so that React doesn't try to render incidents before they've been retrieved.
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>{error}</div>;
+  }
 
+  // Returns string with the appropriate header to render above Incident Tables.
   function printTableHeader(type) {
-    if (isPending && type == "project") {
+    if (isPending && type === "project") {
       return("Pending Projects");
     }
-    else if (isPending && type == "comment") {
+    else if (isPending && type === "comment") {
       return("Pending Comments");
     }
-    else if (!isPending && type == "project") {
+    else if (!isPending && type === "project") {
       return("Resolved Projects");
     }
     else {
@@ -61,82 +75,45 @@ export default function Resolved({isPending, updateSelectedIncident}) {
     }
   }
 
-  function renderIncidents() {
-    if (isPending) {
-      return(
-        <tbody>
-          {/* Map incident information to specific column */}
-          {newPendingIncidents.map((incident)=>
-            <tr className="pending" onClick={() => updateSelectedIncident(incident)}>
+  // Returns a new table row for each incident in the passed-in pending incidents array.
+  function renderPending(incidents) {
+    return (
+      <tbody>
+        {/* Map incident data to specific column. */}
+        {incidents.map((incident) =>
+          <tr className="pending" onClick={() => updateSelectedIncident(incident)}>
+            <td>{incident.user_name}</td>
+            <td>{incident.report_count}</td>
+            <td>{incident.views}</td>
+            <td>{incident.report_status}</td>
+          </tr>
+        )}
+      </tbody>
+    );
+  }
+
+  // Returns a new table row for each incident in the passed-in resolved incidents array.
+  function renderResolved(incidents) {
+    return(
+      <tbody>
+          {/* Map incident data to specific column. */}
+          {incidents.map((incident)=>
+            <tr
+              className={incident.report_status === "approved" ? "approved" : "rejected"}
+              onClick={() => updateSelectedIncident(incident)}
+            >
               <td>{incident.user_name}</td>
               <td>{incident.report_count}</td>
               <td>{incident.views}</td>
               <td>{incident.report_status}</td>
             </tr>
           )}
-        </tbody>
-      );
-    }
-    else {
-      return(
-        <tbody>
-            {/* Map incident information to specific column */}
-            {newResolvedIncidents.map((incident)=>
-              <tr className={incident.report_status=="approved" ? "approved" : "rejected"} onClick={() => updateSelectedIncident(incident)}>
-                <td>{incident.user_name}</td>
-                <td>{incident.report_count}</td>
-                <td>{incident.views}</td>
-                <td>{incident.report_status}</td>
-              </tr>
-            )}
-        </tbody>
-      );
-    }
-  }
-
-  function renderIncidentsComments() {
-    if (isPending) {
-      return(
-        <tbody>
-          {/* Map incident information to specific column */}
-          {newPendingIncidentsComments.map((incident)=>
-            <tr className="pending" onClick={() => updateSelectedIncident(incident)}>
-              <td>{incident.user_name}</td>
-              <td>{incident.report_count}</td>
-              <td>{incident.views}</td>
-              <td>{incident.report_status}</td>
-            </tr>
-          )}
-        </tbody>
-      );
-    }
-    else {
-      return(
-        <tbody>
-            {/* Map incident information to specific column */}
-            {newResolvedIncidentsComments.map((incident)=>
-              <tr className={incident.report_status=="approved" ? "approved" : "rejected"} onClick={() => updateSelectedIncident(incident)}>
-                <td>{incident.user_name}</td>
-                <td>{incident.report_count}</td>
-                <td>{incident.views}</td>
-                <td>{incident.report_status}</td>
-              </tr>
-            )}
-        </tbody>
-      );
-    }
-  }
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  if (error) {
-    return <div>Error!</div>;
+      </tbody>
+    );
   }
 
   // Output
   return (
-    // Resolved Class
     <span className="Resolved">
       {/* Create Table */}
       <div className='incident-tables'>
@@ -152,7 +129,7 @@ export default function Resolved({isPending, updateSelectedIncident}) {
                 <th>Status</th>
               </tr>
             </thead>
-            {renderIncidents()}
+            {isPending ? renderPending(pendingProjects) : renderResolved(resolvedProjects)}
           </table>
         </div>
         <h3><b>{printTableHeader("comment")}</b></h3>
@@ -167,7 +144,7 @@ export default function Resolved({isPending, updateSelectedIncident}) {
                 <th>Status</th>
               </tr>
             </thead>
-            {renderIncidentsComments()}
+            {isPending ? renderPending(pendingComments) : renderResolved(resolvedComments)}
           </table>
         </div>
       </div>

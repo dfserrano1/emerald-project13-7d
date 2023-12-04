@@ -39,14 +39,17 @@ function ViewIncident({ incident }) {
       return (
         <div className={incident.report_status}>
           <b>Username:</b> {incident.user_name}
-          {incident.content_type === "project" ? <div><b>Project Name:</b> {incident.content_title}</div>: <br />}
+          {
+            incident.content_type === "project" ?
+            <div><b>Project Name:</b> {incident.content_title}</div>
+            : <div><b>Comment:</b> {incident.content_text}</div>
+          }
           <b>Reports:</b> {incident.report_count}
           <br />
           <b>Views:</b> {incident.views}
           <br />
           <b>Status:</b> {incident.report_status}
           <br />
-          {incident.content_type === "project" ? null : <div><b>Comment:</b> {incident.content_text}</div>}
           <br />
           <ActionButtons reportID={incident.id} display={setActionButtonDisplay()} />
           <OpenButton incident={incident} />
