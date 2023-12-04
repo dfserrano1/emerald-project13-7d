@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './Resolved.less';
 import '../../views/Administrator/Administrator.less';
-import {createReport, getReports} from '../../Utils/requests';
+import { getReports } from '../../Utils/requests';
 
 export default function Resolved({isPending, updateSelectedIncident}) {
   const [dataArray, setDataArray] = useState([]);
