@@ -18,6 +18,7 @@ function GalleryAdmin() {
     setSelectedIncident(incident);
   }
 
+  // Render page content.
   return (
     <div className="container nav-padding">
       <NavBar />
@@ -40,7 +41,10 @@ function GalleryAdmin() {
         <ViewIncident incident={selectedIncident} />
       </div>
 
-      <Resolved isPending={activeTab === "Pending Review"} updateSelectedIncident={updateSelectedIncident} />
+      <Resolved
+        isPending={activeTab === "Pending Review"}
+        updateSelectedIncident={updateSelectedIncident}
+      />
 
     </div>
   );
