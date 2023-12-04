@@ -1,105 +1,63 @@
-import Logo from '../../assets/casmm_logo.png';
+import ActionButtons from "../../components/Moderation/ActionButtons";
+import OpenButton from "../../components/Moderation/OpenButton";
 import "./ViewIncident.less";
 
-function ViewIncident({ isPending, isProject }) {
-  // Incident data should come from DB. Values are hardcoded for now.
-  const user = "Student1";
-  const title = "My Project";
-  const reports = 5;
-  const views = 100;
-  const status = "Approved";
-  const commentText = "This is a very very very very very very very very very long comment!";
-
-  // Renders status depending on if we're in the Pending Review or Resolved tab. Throws exception
-  // if status value is unexpected with regards to the current tab.
-  function renderStatus() {
-    if (isPending) {
-      if (status == null) {
-        return null;
-      }
-      else {
-        /*
-        throw new Error("Selected incident in Pending Review tab has a status defined. " +
-          "Only resolved incidents should have a status."
-        );
-        */
-      }
+function ViewIncident({ incident }) {
+  // Passes a different value into the ActionButtons display prop depending on how many buttons
+  // must be rendered.
+  function setActionButtonDisplay() {
+    if (incident.report_status == "pending") {
+      return 0; // Pending Incidents: Display both buttons.
     }
-    else { // !isPending
-      if (status === "Approved" || status === "Rejected") {
-        return (
-          <div>
-            <b>Status:</b> {status}
-          </div>
-        );
-      }
-      else {
-        /*
-        throw new Error("Selected incident in Resolved tab has unexpected or undefined status." +
-          "Expected \"Approved\" or \"Rejected\"."
-        );
-        */
-      }
+    else if (incident.report_status == "approved") {
+      return 2; // Approved Incidents: Display only the Reject button.
+    }
+    else if (incident.report_status == "rejected") {
+      return 1; // Rejected Incidents: Display only the Approve button.
     }
   }
 
-  // Renders thumbnail or commentText depending on if the selected incident is a project or
-  // comment.
+  // Renders Incident Summary box content depending on whether an incident is selected.
   function renderContent() {
-    if (isProject) {
-      return <img src={Logo} className="preview" />; // Logo is a placeholder image.
+    if (incident === null) {
+      return (
+        <div className="pending">
+          <b>Username:</b>
+          <br />
+          <b>Project Name:</b>
+          <br />
+          <b>Reports:</b>
+          <br />
+          <b>Views:</b>
+          <br />
+          <b>Status:</b>
+          <br />
+        </div>
+      );
     }
     else {
       return (
-        <div className="preview">
-          <div>
-            <b>Comment:</b> {commentText}
-          </div>
+        <div className={incident.report_status}>
+          <b>Username:</b> {incident.user_name}
+          {incident.content_type === "project" ? <div><b>Project Name:</b> {incident.content_title}</div>: <br />}
+          <b>Reports:</b> {incident.report_count}
+          <br />
+          <b>Views:</b> {incident.views}
+          <br />
+          <b>Status:</b> {incident.report_status}
+          <br />
+          {incident.content_type === "project" ? null : <div><b>Comment:</b> {incident.content_text}</div>}
+          <br />
+          <ActionButtons reportID={incident.id} display={setActionButtonDisplay()} />
+          <OpenButton incident={incident} />
         </div>
       );
     }
   }
 
-  // Returns className for styling Incident Summary box. White for Pending Review tab, and green
-  // or red for Resolved tab.
-  function changeBoxColor() {
-    if (isPending) {
-      return "pending";
-    }
-    else {
-      if (status === "Approved") {
-        return "resolved-approved";
-      }
-      else if (status === "Rejected") {
-        return "resolved-rejected";
-      }
-    }
-  }
-
   return (
-    <div className="right-column">
-
-      <h3><b>Incident Summary</b></h3>
-      <p><b>Select an incident to view more information</b></p>
-
-      <div className="view-incident">
-        <div className={changeBoxColor()}>
-
-          <b>User:</b> {user}
-          <br />
-          <b>Title:</b> {title}
-          <br />
-          <b>Reports:</b> {reports}
-          <br />
-          <b>Views:</b> {views}
-          <br />
-          {renderStatus()}
-          <br />
-          {renderContent()}
-
-        </div>
-      </div>
-
+    <div className="view-incident">
+      {renderContent()}
     </div>
   );
 }
