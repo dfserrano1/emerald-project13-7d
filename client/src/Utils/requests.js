@@ -6,9 +6,10 @@ const GET = 'GET';
 const PUT = 'PUT';
 const POST = 'POST';
 const DELETE = 'DELETE';
+const SEARCH = 'SEARCH';
 
 // all request functions should utilize makeRequest and return an obj with structure {data, err}
-const makeRequest = async ({ method, path, data, auth = false, error }) => {
+const makeRequest = async ({ method, path, data, auth = false, params = null, error }) => {
   //console.log(data);
   let res = null;
   let err = null;
@@ -33,6 +34,9 @@ const makeRequest = async ({ method, path, data, auth = false, error }) => {
         break;
       case DELETE:
         res = (await axios.delete(path, config)).data;
+        break;
+      case SEARCH:
+        res = (await axios.get(path, params, config)).data;
         break;
       default:
         throw Error('Invalid method.');
@@ -674,6 +678,7 @@ export const getClassroomWorkspace = async (id) =>
     error: 'Unable to retrive classroom workspaces',
   });
 
+//gets a singular report based off of the report's id
 export const getReport = async (id) =>
   makeRequest({
     method: GET,
@@ -682,56 +687,125 @@ export const getReport = async (id) =>
     error: 'Unable to retrive report',
   });
 
-  //most likely need to change this to get a single report as this will allow the passing of an object into the update/create functions
-  export const getReports = async () => 
+//gets a report based off of the unique_key in the database
+export const getReportFromGalleryID = async (galleryID) =>
+  makeRequest({
+    method: SEARCH,
+    path: `${server}/reports`,
+    auth: true,
+    params: {params: {unique_key: galleryID}},
+    error: 'Unable to retrive report',
+  });
+
+//most likely need to change this to get a single report as this will allow the passing of an object into the update/create functions
+export const getReports = async () => 
+  makeRequest({
+    method: GET,
+    path: `${server}/reports`,
+    auth: true,
+    error: 'Unable to retrive reports',
+  });
+
+//when the flag button is pressed, this function is called to create a report in the database
+export const createReport = async (
+  content, user
+  ) =>
+  makeRequest({
+    method: POST,
+    path: `${server}/reports`,
+    auth: true,
+    data: {
+      unique_key: content.id,  //id given by gallery team
+      views: content.view_count,   //views given by gallery team
+      report_count: 1,        //set report count to 1 on creation
+      user_name: content.user_name, //pull the student's info from gallery team
+      report_status: "pending",      //set initial status to pending
+      students: [user],                    
+      content_type: content.type,    //from gallery team
+      content_title: content.title,  //from gallery team
+      content_text: content.text,     //from gallery team
+      globally_hidden: false            //set globally hidden to 0 initially
+    },
+    error: 'Unable to create report',
+  });
+
+//when the admin makes an update to the report, this function is called in order to update the report status
+export const updateReport = async (
+  unique_key,
+  views,
+  report_count,
+  user_name,
+  globally_hidden,
+  report_status,
+  id
+) =>
+  makeRequest({
+    method: PUT,
+    path: `${server}/reports/${id}`,
+    data: {
+      unique_key: unique_key,
+      views: views,
+      report_count: report_count,
+      user_name: user_name,
+      globally_hidden: globally_hidden,
+      report_status: report_status,
+    },
+    auth: true,
+    error: 'Failed to update report',
+  });
+
+export const updateReporters = async (
+  report, newReportersArray
+) =>
+  makeRequest({
+    method: PUT,
+    path: `${server}/reports/${report.id}`,
+    data: {
+      unique_key: report.unique_key,
+      views: report.views,
+      report_count: newReportersArray.length,
+      user_name: report.user_name,
+      report_status: report.report_status,
+      content_type: report.content_type,
+      content_title: report.content_title,
+      content_text: report.content_text,
+      students: newReportersArray,
+      globally_hidden: report.globally_hidden
+    },
+    auth: true,
+    error: 'Failed to add reporter to the report',
+  });
+
+export const updateGloballyHidden = async (
+  id, globallyHidden
+) =>
+  makeRequest({
+    method: PUT,
+    path: `${server}/reports/${id}`,
+    data: {
+      globally_hidden: globallyHidden,
+    },
+    auth: true,
+    error: 'Failed to update report globally hidden status',
+});
+
+export const deleteReport = async (id) =>
+  makeRequest({
+    method: DELETE,
+    path: `${server}/reports/${id}`,
+    auth: true,
+    error: 'Failed to delete report.',
+  });
+  
+export const updateReportStatus = async (
+    id, reportStatus
+  ) =>
     makeRequest({
-      method: GET,
-      path: `${server}/reports`,
+      method: PUT,
+      path: `${server}/reports/${id}`,
+      data: {
+        report_status: reportStatus
+      },
       auth: true,
-      error: 'Unable to retrive reports',
-    });
-
-    //when the flag button is pressed, this function is called to create a report in the database
-    export const createReport = async (
-      unique_key,
-      views,
-      report_count,
-      user_name,
-      report_status
-    ) =>
-      makeRequest({
-        method: POST,
-        path: `${server}/reports`,
-        auth: true,
-        data: {
-          unique_key,
-          views,
-          report_count,
-          user_name,
-          report_status,
-        },
-        error: 'Unable to create report',
-      });
-
-      //when the admin makes an update to the report, this function is called in order to update the report status
-      export const updateReport = async (
-        unique_key,
-        views,
-        report_count,
-        user_name,
-        report_status,
-        id
-      ) =>
-        makeRequest({
-          method: PUT,
-          path: `${server}/reports/${id}`,
-          data: {
-            unique_key: unique_key,
-            views: views,
-            report_count: report_count,
-            user_name: user_name,
-            report_status: report_status,
-          },
-          auth: true,
-          error: 'Failed to update report',
-        });
+      error: 'Failed to update report status',
+  });

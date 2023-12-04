@@ -25,7 +25,23 @@
       "type": "string"
     },
     "report_status": {
-      "type": "integer"
+      "type": "string"
+    },
+    "content_type": {
+      "type": "string"
+    },
+    "content_title": {
+      "type": "string"
+    },
+    "content_text": {
+      "type": "string"
+    },
+    "students": {
+      "collection": "student",
+      "via": "report"
+    },
+    "globally_hidden": {
+      "type": "boolean"
     }
   }
 }

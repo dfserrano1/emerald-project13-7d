@@ -1,9 +1,10 @@
 import { Button } from 'antd';
 import "./OpenButton.less";
 
-function OpenButton() {
+function OpenButton({ incident }) {
   function handleClick() {
-    alert("Now visiting this post or comment's page on the Gallery...");
+    let alertText = "Now visiting this " + incident.content_type + "'s page on the Gallery";
+    alert(alertText);
   }
 
   return (

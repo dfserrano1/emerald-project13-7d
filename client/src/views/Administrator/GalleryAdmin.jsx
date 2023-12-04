@@ -12,12 +12,10 @@ function GalleryAdmin() {
     setActiveTab(tab);
   }
 
-  const [selectedID, setSelectedID] = useState(0);
-  const [selectedIsProject, setSelectedIsProject] = useState(true); // Won't be needed in the future since DB should have isProject column.
+  const [selectedIncident, setSelectedIncident] = useState(null);
 
-  function updateSelected(id, isProject) {
-    setSelectedID(id);
-    setSelectedIsProject(isProject);
+  function updateSelectedIncident(incident) {
+    setSelectedIncident(incident);
   }
 
   return (
@@ -39,10 +37,10 @@ function GalleryAdmin() {
       <div className="right-column">
         <h3><b>Incident Summary</b></h3>
         <p><b>Select an incident to view more information</b></p>
-        <ViewIncident id={selectedID} isProject={selectedIsProject} />
+        <ViewIncident incident={selectedIncident} />
       </div>
 
-      <Resolved isPending={activeTab === "Pending Review"} updateSelected={updateSelected} />
+      <Resolved isPending={activeTab === "Pending Review"} updateSelectedIncident={updateSelectedIncident} />
 
     </div>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import './ActionButtons.less';
-import { getReport, updateReport } from "../../Utils/requests";
+import { getReport, updateReport, updateGloballyHidden, updateReportStatus } from "../../Utils/requests";
 import { Button } from 'antd';
 
 export default function ActionButtons({reportID, display = 0}) {
@@ -10,11 +10,10 @@ export default function ActionButtons({reportID, display = 0}) {
     alert("The content has been approved! Report ID: " + reportID);
     
     // Use setter from requests.js to update status column as approved
-    const report = getReport(reportID);
-    updateReport(report.unique_key, report.views, report.report_count, report.user_name, 1, reportID);
+    updateReportStatus(reportID, "approved")
 
     // Remove hidden status from gallery, if hidden
-
+    updateGloballyHidden(reportID, 0);
   }
 
   function Reject() {
@@ -22,11 +21,10 @@ export default function ActionButtons({reportID, display = 0}) {
     alert("The content has been rejected! Report ID: " + reportID);
 
     // Use setter from requests.js to update status column as rejected
-    const report = getReport(reportID);
-    updateReport(report.unique_key, report.views, 0, report.user_name, 2, reportID);
+    updateReportStatus(reportID, "rejected")
 
     // Enabling hiding post from gallery if not already hidden
-    
+    updateGloballyHidden(reportID, 1);
   }
 
   if (display == 0) {

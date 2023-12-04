@@ -1,7 +1,8 @@
 @import "../../assets/style.less";
-@flagIcon: "src/assets/flag_white.png";
+@whiteFlagIcon: "src/assets/flag_white.png";
+@redFlagIcon: "src/assets/flag_red.png";
 .Unclicked {
-  background-image: url(@flagIcon);
+  background-image: url(@whiteFlagIcon);
   //image: url("../../assets/flag_white.png");
   background-size: cover;
   background-color: transparent;
@@ -12,7 +13,7 @@
 }
 
 .Clicked {
-  background-image: url("src/assets/flag_red.png");
+  background-image: url(@redFlagIcon);
   //image: url("../../assets/flag_white.png");
   background-size: cover;
   background-color: transparent;
@@ -24,6 +25,7 @@
 
 .ant-btn.flag{
   @flagIcon = "src/assets/flag_white.png";
+  @redFlagIcon = "src/assets/flag_red.png";
   width: 60%;
   height: 95%;
   border: 0px;
